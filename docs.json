@@ -3,9 +3,9 @@
   "theme": "mint",
   "name": "KnowFlow",
   "colors": {
-    "primary": "#16A34A",
-    "light": "#07C983",
-    "dark": "#15803D"
+    "primary": "#4285F4",
+    "light": "#4285F4",
+    "dark": "#1B3B6F"
   },
   "favicon": "/favicon.svg",
   "navigation": {
@@ -105,7 +105,7 @@
       "anchors": [
         {
           "anchor": "Dashboard",
-          "href": "https://app.knowflow.in",
+          "href": "https://dashboard.knowflow.in",
           "icon": "chart-pie"
         },
         {
@@ -135,7 +135,7 @@
     "primary": {
       "type": "button",
       "label": "Dashboard",
-      "href": "https://app.knowflow.in"
+      "href": "https://dashboard.knowflow.in"
     }
   },
   "footer": {
