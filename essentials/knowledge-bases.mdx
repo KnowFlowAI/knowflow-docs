@@ -1,0 +1,234 @@
+---
+title: 'Knowledge Bases'
+description: 'Learn how to create and manage knowledge bases in KnowFlow'
+---
+
+Knowledge bases are the foundation of your KnowFlow AI assistants. They store and organize all the information that your AI will use to generate responses.
+
+## Understanding Knowledge Bases
+
+A knowledge base in KnowFlow is a collection of information from various sources that your AI assistant will use to answer questions. By creating comprehensive knowledge bases, you ensure your AI provides accurate, contextual responses based on your organization's specific content.
+
+### Key Concepts
+
+<CardGroup cols={2}>
+  <Card title="Knowledge Base" icon="database">
+    A container for all related information on a particular topic or product
+  </Card>
+  <Card title="Knowledge Source" icon="link">
+    Individual sources of information (documents, websites, GitHub repos)
+  </Card>
+  <Card title="Chunking" icon="puzzle-piece">
+    Breaking down content into smaller, digestible pieces for better retrieval
+  </Card>
+  <Card title="Embedding" icon="vector-square">
+    Converting text into numerical vectors for semantic search
+  </Card>
+</CardGroup>
+
+## Creating a Knowledge Base
+
+<Steps>
+  <Step title="Navigate to Knowledge Bases">
+    From your organization dashboard, click on **Knowledge Bases** in the left sidebar.
+  </Step>
+  <Step title="Create New Knowledge Base">
+    Click the **Create Knowledge Base** button in the upper right corner.
+  </Step>
+  <Step title="Configure Settings">
+    Enter the following information:
+    - **Name**: A descriptive name for your knowledge base
+    - **Description**: (Optional) A brief description of its purpose
+    - **Access Level**: Choose between private (organization only) or public (shareable)
+  </Step>
+  <Step title="Submit">
+    Click **Create** to finish setting up your knowledge base.
+  </Step>
+</Steps>
+
+## Adding Knowledge Sources
+
+KnowFlow supports multiple types of knowledge sources to build comprehensive AI assistants.
+
+### Document Upload
+
+Upload files directly from your computer:
+
+<Steps>
+  <Step title="Select Knowledge Base">
+    Open the knowledge base you want to add documents to
+  </Step>
+  <Step title="Add Documents">
+    Click **Add Sources** → **Upload Document**
+  </Step>
+  <Step title="Select Files">
+    Choose files from your computer to upload. Supported formats include:
+    - PDF (.pdf)
+    - Microsoft Word (.docx, .doc)
+    - Text files (.txt)
+    - Markdown (.md)
+    - CSV (.csv)
+    - Excel (.xlsx)
+  </Step>
+  <Step title="Configure Processing">
+    Optionally adjust settings for:
+    - Chunking method (by paragraph, page, or custom size)
+    - Text extraction preferences
+    - Metadata extraction
+  </Step>
+  <Step title="Upload">
+    Click **Upload** to process and index your documents
+  </Step>
+</Steps>
+
+### Website Integration
+
+Import content from websites:
+
+<Steps>
+  <Step title="Select Knowledge Base">
+    Open the knowledge base you want to add website content to
+  </Step>
+  <Step title="Add Website">
+    Click **Add Sources** → **Website URL**
+  </Step>
+  <Step title="Enter URL Details">
+    Provide the following information:
+    - Website URL (e.g., https://example.com)
+    - Source name (for identification)
+    - Crawl configuration:
+      - Depth (how many links deep to follow)
+      - Maximum pages
+      - Include/exclude patterns
+  </Step>
+  <Step title="Start Crawling">
+    Click **Add** to begin the crawling process
+  </Step>
+</Steps>
+
+### GitHub Repository Connection
+
+Connect a GitHub repository to your knowledge base:
+
+<Steps>
+  <Step title="Select Knowledge Base">
+    Open the target knowledge base
+  </Step>
+  <Step title="Add GitHub Source">
+    Click **Add Sources** → **GitHub**
+  </Step>
+  <Step title="Enter Repository Details">
+    Provide:
+    - Repository URL or owner/repo format
+    - Branch name (defaults to main/master)
+    - Source name for identification
+  </Step>
+  <Step title="Configure Options">
+    Set:
+    - File types to include/exclude
+    - Directory patterns to include/exclude
+    - Whether to include README files
+  </Step>
+  <Step title="Connect">
+    Click **Connect** to import and index the repository
+  </Step>
+</Steps>
+
+## Managing Knowledge Bases
+
+### Viewing Knowledge Sources
+
+From your knowledge base dashboard, you can see all added sources with the following information:
+- Source name
+- Type (document, website, GitHub)
+- Last updated time
+- Status (processing, completed, error)
+- Number of chunks/vectors
+
+### Updating Sources
+
+To update an existing source:
+
+1. Select the knowledge source from your knowledge base
+2. Click the **Update** button
+3. For documents, upload a new version
+4. For websites or GitHub, trigger a re-crawl/re-sync
+
+### Removing Sources
+
+To remove a knowledge source:
+
+1. Select the knowledge source from your knowledge base
+2. Click the **Delete** button
+3. Confirm the deletion
+
+<Note>
+Deleting a source will immediately remove all its content from your knowledge base and affect any AI assistants using this knowledge.
+</Note>
+
+## Advanced Features
+
+### Custom Metadata
+
+Add custom metadata to your knowledge sources for more targeted retrieval:
+
+1. Select a knowledge source
+2. Click **Edit Metadata**
+3. Add key-value pairs for relevant information
+4. Save changes
+
+This metadata can be used for filtering in your AI assistant's responses.
+
+### Content Filtering
+
+Set up content filters to exclude certain information from your knowledge base:
+
+1. Go to your knowledge base settings
+2. Navigate to the **Content Filters** tab
+3. Set up rules based on:
+   - Keywords or phrases to exclude
+   - Regular expressions for pattern matching
+   - Content categories to omit
+
+### Testing Knowledge Retrieval
+
+Test how effectively your knowledge base retrieves information:
+
+1. Go to your knowledge base
+2. Click the **Test** tab
+3. Enter a sample question
+4. View retrieved chunks and their relevance scores
+5. Refine your knowledge base based on results
+
+## Best Practices
+
+- **Organize logically**: Create separate knowledge bases for different products, topics, or departments
+- **Update regularly**: Keep your knowledge base current by updating sources when information changes
+- **Monitor quality**: Use the testing feature to ensure accurate information retrieval
+- **Balance comprehensiveness with relevance**: Include enough information to be helpful without overloading the system
+- **Use descriptive naming**: Name knowledge sources clearly for easy management
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="Document Processing Failed">
+    - Check if the document format is supported
+    - Verify the document is not password-protected
+    - Ensure the document contains extractable text (not just images)
+    - Try converting to PDF and re-uploading
+  </Accordion>
+  
+  <Accordion title="Website Crawling Issues">
+    - Verify the website allows crawling (check robots.txt)
+    - Ensure the URL is formatted correctly (including https://)
+    - Try reducing crawl depth and page limits
+    - Check if the website requires authentication
+  </Accordion>
+  
+  <Accordion title="GitHub Connection Problems">
+    - Verify repository permissions (public or proper access granted)
+    - Check branch name is correct
+    - Ensure repository URL is in the correct format
+    - Try connecting to a specific subdirectory instead of the entire repo
+  </Accordion>
+</AccordionGroup> 

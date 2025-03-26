@@ -1,7 +1,7 @@
 {
   "$schema": "https://mintlify.com/docs.json",
   "theme": "mint",
-  "name": "Knowflow",
+  "name": "KnowFlow",
   "colors": {
     "primary": "#16A34A",
     "light": "#07C983",
@@ -22,12 +22,21 @@
             ]
           },
           {
-            "group": "Essentials",
+            "group": "Core Features",
             "pages": [
+              "essentials/organizations",
+              "essentials/knowledge-bases",
+              "essentials/apps",
+              "essentials/analytics"
+            ]
+          },
+          {
+            "group": "Advanced",
+            "pages": [
+              "essentials/settings",
               "essentials/markdown",
               "essentials/code",
               "essentials/images",
-              "essentials/settings",
               "essentials/navigation",
               "essentials/reusable-snippets"
             ]
@@ -44,12 +53,49 @@
             ]
           },
           {
-            "group": "Endpoint Examples",
+            "group": "Authentication",
             "pages": [
-              "api-reference/endpoint/get",
-              "api-reference/endpoint/create",
-              "api-reference/endpoint/delete",
-              "api-reference/endpoint/webhook"
+              "api-reference/auth/register",
+              "api-reference/auth/login",
+              "api-reference/auth/refresh"
+            ]
+          },
+          {
+            "group": "Organizations",
+            "pages": [
+              "api-reference/organizations/list",
+              "api-reference/organizations/get",
+              "api-reference/organizations/create",
+              "api-reference/organizations/update",
+              "api-reference/organizations/delete"
+            ]
+          },
+          {
+            "group": "Knowledge Bases",
+            "pages": [
+              "api-reference/knowledge-bases/list",
+              "api-reference/knowledge-bases/get",
+              "api-reference/knowledge-bases/create",
+              "api-reference/knowledge-bases/update",
+              "api-reference/knowledge-bases/delete"
+            ]
+          },
+          {
+            "group": "AI Assistants",
+            "pages": [
+              "api-reference/apps/list",
+              "api-reference/apps/get",
+              "api-reference/apps/create",
+              "api-reference/apps/update",
+              "api-reference/apps/delete"
+            ]
+          },
+          {
+            "group": "Chat",
+            "pages": [
+              "api-reference/chat/send-message",
+              "api-reference/chat/get-conversations",
+              "api-reference/chat/get-messages"
             ]
           }
         ]
@@ -58,18 +104,18 @@
     "global": {
       "anchors": [
         {
-          "anchor": "Documentation",
-          "href": "https://mintlify.com/docs",
-          "icon": "book-open-cover"
+          "anchor": "Dashboard",
+          "href": "https://app.knowflow.in",
+          "icon": "chart-pie"
         },
         {
           "anchor": "Community",
-          "href": "https://mintlify.com/community",
-          "icon": "slack"
+          "href": "https://discord.gg/knowflow",
+          "icon": "discord"
         },
         {
           "anchor": "Blog",
-          "href": "https://mintlify.com/blog",
+          "href": "https://knowflow.in/blog",
           "icon": "newspaper"
         }
       ]
@@ -83,20 +129,20 @@
     "links": [
       {
         "label": "Support",
-        "href": "mailto:md@knowflow.in"
+        "href": "mailto:support@knowflow.in"
       }
     ],
     "primary": {
       "type": "button",
       "label": "Dashboard",
-      "href": "https://dashboard.mintlify.com"
+      "href": "https://app.knowflow.in"
     }
   },
   "footer": {
     "socials": {
-      "x": "https://x.com/mintlify",
-      "github": "https://github.com/mintlify",
-      "linkedin": "https://linkedin.com/company/mintlify"
+      "twitter": "https://twitter.com/knowflow_ai",
+      "github": "https://github.com/knowflow",
+      "linkedin": "https://linkedin.com/company/knowflow-ai"
     }
   }
 }

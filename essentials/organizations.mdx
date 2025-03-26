@@ -1,0 +1,243 @@
+---
+title: 'Organizations'
+description: 'Create and manage organizations to organize your KnowFlow projects'
+---
+
+Organizations are the top-level organizational units in KnowFlow that help you manage different projects, teams, and resources. They provide a way to segment your work and control access to knowledge bases and AI assistants.
+
+## Understanding Organizations
+
+An organization in KnowFlow is a dedicated environment where you can create and manage knowledge bases, AI assistants, and team members. Organizations help you organize your projects and control who has access to specific resources.
+
+### Key Concepts
+
+<CardGroup cols={2}>
+  <Card title="Organization" icon="building">
+    A container for all resources related to a specific project or team
+  </Card>
+  <Card title="Organization Members" icon="users">
+    Users with access to the organization and its resources
+  </Card>
+  <Card title="Roles & Permissions" icon="lock">
+    Access levels that determine what actions members can perform
+  </Card>
+  <Card title="Resource Management" icon="folder-tree">
+    Organization of knowledge bases and apps within an organization
+  </Card>
+</CardGroup>
+
+## Creating an Organization
+
+<Steps>
+  <Step title="Access Organization Section">
+    From the dashboard, click on your profile in the top-right corner and select **Organizations**.
+  </Step>
+  <Step title="Create New Organization">
+    Click the **Create Organization** button.
+  </Step>
+  <Step title="Enter Basic Information">
+    Provide the following details:
+    - **Organization Name**: A descriptive name for your organization
+    - **Description**: (Optional) A brief description of its purpose
+    - **Icon**: (Optional) Upload a custom icon for easy identification
+  </Step>
+  <Step title="Submit">
+    Click **Create** to set up your new organization.
+  </Step>
+</Steps>
+
+## Inviting Team Members
+
+Add team members to collaborate in your organization:
+
+<Steps>
+  <Step title="Access Organization Settings">
+    From your organization, click on **Settings** in the sidebar, then select the **Members** tab.
+  </Step>
+  <Step title="Invite Members">
+    Click the **Invite Members** button.
+  </Step>
+  <Step title="Enter Details">
+    Add the following information:
+    - **Email Addresses**: Enter one or more email addresses (comma-separated)
+    - **Role**: Select the appropriate role for the invitees
+    - **Custom Message**: (Optional) Add a personalized invitation message
+  </Step>
+  <Step title="Send Invitations">
+    Click **Send Invites** to dispatch invitation emails.
+  </Step>
+</Steps>
+
+## Managing Organization Members
+
+### Member Roles
+
+KnowFlow provides different roles with varying levels of access:
+
+| Role | Description | Capabilities |
+| ---- | ----------- | ------------ |
+| **Owner** | Complete control of the organization | Can manage all aspects including billing, deletion, and role assignment |
+| **Admin** | Administrative access | Can manage knowledge bases, apps, and members, but cannot delete the organization or change billing |
+| **Editor** | Content management access | Can create and edit knowledge bases and apps, but cannot manage members or billing |
+| **Viewer** | Read-only access | Can view and use resources but cannot make changes |
+
+### Changing Member Roles
+
+To modify a member's role:
+
+1. Go to **Settings** → **Members**
+2. Find the member in the list
+3. Click the role dropdown next to their name
+4. Select the new role
+5. Confirm the change
+
+### Removing Members
+
+To remove a member from your organization:
+
+1. Go to **Settings** → **Members**
+2. Find the member in the list
+3. Click the **Remove** button
+4. Confirm the removal
+
+<Note>
+Removing a member will revoke their access to all resources in the organization immediately.
+</Note>
+
+## Organization Settings
+
+### General Settings
+
+Manage basic organization information:
+
+1. Go to **Settings** → **General**
+2. Adjust:
+   - Organization name
+   - Description
+   - Icon/branding
+   - Time zone and language preferences
+
+### Security Settings
+
+Configure security options for your organization:
+
+1. Go to **Settings** → **Security**
+2. Set options for:
+   - Two-factor authentication requirements
+   - Session timeout policies
+   - IP restrictions
+   - Single Sign-On (SSO) integration (Enterprise plan)
+
+### Billing and Subscription
+
+Manage your subscription and billing information:
+
+1. Go to **Settings** → **Billing**
+2. View and manage:
+   - Current plan and usage
+   - Payment methods
+   - Billing history
+   - Plan upgrades/downgrades
+
+## Switching Between Organizations
+
+To switch to a different organization:
+
+1. Click on the organization name in the top-left corner of the dashboard
+2. Select the organization you want to switch to from the dropdown menu
+
+If you have many organizations:
+
+1. Click **View All Organizations** at the bottom of the dropdown
+2. Browse the complete list of organizations
+3. Click on the desired organization
+
+## Resource Management
+
+### Knowledge Base Organization
+
+Organize knowledge bases within your organization:
+
+1. Go to the **Knowledge Bases** section
+2. Use folders to group related knowledge bases:
+   - Click **Create Folder**
+   - Name the folder based on departments, products, or projects
+   - Drag and drop knowledge bases into appropriate folders
+
+### App Organization
+
+Organize AI assistants (apps) within your organization:
+
+1. Go to the **Apps** section
+2. Use tags to categorize apps:
+   - Click on an app to view its details
+   - Add or edit tags in the **Tags** field
+   - Use the filters to find apps by tag, deployment type, or status
+
+## Advanced Features
+
+### Organization Templates
+
+Create templates for quick setup of new organizations:
+
+1. Configure an organization with the desired knowledge bases and apps
+2. Go to **Settings** → **Templates**
+3. Click **Save as Template**
+4. Name and describe your template
+5. Use this template when creating new organizations
+
+### Organization Analytics
+
+Monitor activity across your organization:
+
+1. Go to **Settings** → **Analytics**
+2. View metrics such as:
+   - Active users
+   - Knowledge base growth
+   - App usage
+   - Query volume and patterns
+
+### Audit Logs
+
+Track changes made within your organization:
+
+1. Go to **Settings** → **Audit Logs**
+2. View a chronological list of actions taken by organization members
+3. Filter by:
+   - Date range
+   - User
+   - Action type
+   - Resource affected
+
+## Best Practices
+
+- **Logical organization**: Create separate organizations for distinct projects, departments, or clients
+- **Appropriate permissions**: Assign the least privilege necessary for each team member
+- **Regular reviews**: Periodically review organization members and their roles
+- **Standardized naming**: Use consistent naming conventions for resources across organizations
+- **Documentation**: Maintain internal documentation about organization structure and governance
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="Member Cannot Access Resources">
+    - Verify the member has accepted their invitation
+    - Check that their role has appropriate permissions
+    - Ensure they're accessing the correct organization
+    - Have them try logging out and back in
+  </Accordion>
+  
+  <Accordion title="Organization Limit Reached">
+    - Review your current plan limits
+    - Consider upgrading to a higher tier
+    - Archive unused organizations to free up space
+    - Contact support for temporary limit increases
+  </Accordion>
+  
+  <Accordion title="Resource Transfer Issues">
+    - Ensure you have appropriate permissions in both source and destination organizations
+    - Check that the resource isn't being used by active apps
+    - Try transferring one resource at a time
+    - Contact support for assistance with bulk transfers
+  </Accordion>
+</AccordionGroup> 

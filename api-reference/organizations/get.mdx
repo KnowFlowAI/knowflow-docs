@@ -1,0 +1,170 @@
+---
+title: 'Get Organization'
+description: 'Retrieve detailed information about a specific organization'
+---
+
+# Get Organization
+
+Retrieve detailed information about a specific organization by its ID.
+
+## API Endpoint
+
+```
+GET /api/v1/organizations/{organization_id}
+```
+
+## Request
+
+### Path Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| `organization_id` | string | **Required**. The unique identifier of the organization |
+
+### Headers
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| `Authorization` | string | **Required**. Bearer token for authentication |
+
+## Response
+
+### 200: OK
+
+```json
+{
+  "id": "org_12345abcde",
+  "name": "Acme Corp",
+  "description": "Acme Corporation organization",
+  "created_at": "2023-01-15T08:30:00Z",
+  "updated_at": "2023-02-20T14:15:30Z",
+  "owner_id": "user_09876zyxwv",
+  "settings": {
+    "default_language": "en",
+    "timezone": "America/New_York",
+    "security": {
+      "require_mfa": false,
+      "session_timeout": 3600
+    }
+  },
+  "members": [
+    {
+      "user_id": "user_09876zyxwv",
+      "name": "John Doe",
+      "email": "john@example.com",
+      "role": "owner",
+      "joined_at": "2023-01-15T08:30:00Z"
+    },
+    {
+      "user_id": "user_54321abcde",
+      "name": "Jane Smith",
+      "email": "jane@example.com",
+      "role": "admin",
+      "joined_at": "2023-01-16T10:45:00Z"
+    }
+  ],
+  "member_count": 2,
+  "knowledge_bases_count": 5,
+  "apps_count": 3,
+  "role": "owner"
+}
+```
+
+### Response Fields
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| `id` | string | Unique identifier for the organization |
+| `name` | string | Name of the organization |
+| `description` | string | Description of the organization |
+| `created_at` | string | Creation date and time in ISO 8601 format |
+| `updated_at` | string | Last update date and time in ISO 8601 format |
+| `owner_id` | string | User ID of the organization owner |
+| `settings` | object | Organization settings |
+| `settings.default_language` | string | Default language code |
+| `settings.timezone` | string | Timezone setting |
+| `settings.security` | object | Security settings |
+| `settings.security.require_mfa` | boolean | Whether multi-factor authentication is required |
+| `settings.security.session_timeout` | integer | Session timeout in seconds |
+| `members` | array | List of organization members |
+| `members[].user_id` | string | User ID of the member |
+| `members[].name` | string | Full name of the member |
+| `members[].email` | string | Email address of the member |
+| `members[].role` | string | Role of the member in the organization |
+| `members[].joined_at` | string | Date and time when the member joined |
+| `member_count` | integer | Total number of members in the organization |
+| `knowledge_bases_count` | integer | Number of knowledge bases in the organization |
+| `apps_count` | integer | Number of apps in the organization |
+| `role` | string | The authenticated user's role in the organization |
+
+### 401: Unauthorized
+
+```json
+{
+  "detail": "Invalid or expired token"
+}
+```
+
+### 403: Forbidden
+
+```json
+{
+  "detail": "Insufficient permissions to access this organization"
+}
+```
+
+### 404: Not Found
+
+```json
+{
+  "detail": "Organization not found"
+}
+```
+
+## Code Examples
+
+### cURL
+
+```bash
+curl -X GET "https://api.knowflow.in/api/v1/organizations/org_12345abcde" \
+  -H "Authorization: Bearer YOUR_API_TOKEN"
+```
+
+### Python
+
+```python
+import requests
+
+organization_id = "org_12345abcde"
+url = f"https://api.knowflow.in/api/v1/organizations/{organization_id}"
+headers = {
+    "Authorization": "Bearer YOUR_API_TOKEN"
+}
+
+response = requests.get(url, headers=headers)
+organization = response.json()
+
+print(f"Organization: {organization['name']}")
+print(f"Members: {organization['member_count']}")
+```
+
+### JavaScript
+
+```javascript
+const getOrganization = async (organizationId) => {
+  const response = await fetch(`https://api.knowflow.in/api/v1/organizations/${organizationId}`, {
+    method: 'GET',
+    headers: {
+      'Authorization': 'Bearer YOUR_API_TOKEN',
+      'Content-Type': 'application/json'
+    }
+  });
+  
+  const organization = await response.json();
+  
+  console.log(`Organization: ${organization.name}`);
+  console.log(`Members: ${organization.member_count}`);
+};
+
+getOrganization('org_12345abcde');
+``` 

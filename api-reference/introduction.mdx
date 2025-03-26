@@ -1,33 +1,152 @@
 ---
-title: 'Introduction'
-description: 'Example section for showcasing API endpoints'
+title: 'API Reference'
+description: 'Complete reference for the KnowFlow API'
 ---
 
-<Note>
-  If you're not looking to build API reference documentation, you can delete
-  this section by removing the api-reference folder.
-</Note>
-
-## Welcome
-
-There are two ways to build API documentation: [OpenAPI](https://mintlify.com/docs/api-playground/openapi/setup) and [MDX components](https://mintlify.com/docs/api-playground/mdx/configuration). For the starter kit, we are using the following OpenAPI specification.
-
-<Card
-  title="Plant Store Endpoints"
-  icon="leaf"
-  href="https://github.com/mintlify/starter/blob/main/api-reference/openapi.json"
->
-  View the OpenAPI specification file
-</Card>
+The KnowFlow API allows you to programmatically manage your knowledge bases, AI assistants, and user interactions. This reference provides detailed information about available endpoints, request/response formats, and authentication methods.
 
 ## Authentication
 
-All API endpoints are authenticated using Bearer tokens and picked up from the specification file.
+All API requests (except registration and login) require authentication using a Bearer token.
+
+```bash
+curl -X GET https://api.knowflow.in/v1/organizations \
+  -H "Authorization: Bearer YOUR_API_TOKEN"
+```
+
+### Obtaining an API Token
+
+You can generate an API token in the KnowFlow dashboard:
+
+1. Log in to your KnowFlow account
+2. Go to **Settings** → **API Keys**
+3. Click **Generate New API Key**
+4. Name your API key and set permissions
+5. Copy the generated token (it will only be shown once)
+
+## Base URL
+
+All API endpoints use the following base URL:
+
+```
+https://api.knowflow.in/v1
+```
+
+## Response Format
+
+All responses are returned in JSON format. A typical response includes:
 
 ```json
-"security": [
-  {
-    "bearerAuth": []
+{
+  "status": "success",
+  "data": {
+    // Response data
   }
-]
+}
 ```
+
+For error responses:
+
+```json
+{
+  "status": "error",
+  "error": {
+    "code": "error_code",
+    "message": "Human-readable error message"
+  }
+}
+```
+
+## Rate Limiting
+
+The API has rate limits to ensure fair usage. Rate limit information is included in response headers:
+
+```
+X-RateLimit-Limit: 100
+X-RateLimit-Remaining: 98
+X-RateLimit-Reset: 1635753600
+```
+
+If you exceed the rate limit, you will receive a `429 Too Many Requests` response.
+
+## Pagination
+
+List endpoints support pagination with the following query parameters:
+
+- `page`: Page number (starting from 1)
+- `limit`: Number of items per page (default: 20, max: 100)
+
+Paginated responses include metadata:
+
+```json
+{
+  "status": "success",
+  "data": [
+    // Array of items
+  ],
+  "pagination": {
+    "total": 120,
+    "page": 2,
+    "limit": 20,
+    "pages": 6
+  }
+}
+```
+
+## Error Codes
+
+Common error codes you may encounter:
+
+| Code | Description |
+|------|-------------|
+| `authentication_error` | Invalid or missing API token |
+| `permission_denied` | Insufficient permissions for the requested action |
+| `resource_not_found` | The requested resource does not exist |
+| `validation_error` | Invalid request parameters |
+| `rate_limit_exceeded` | Too many requests, try again later |
+| `server_error` | Internal server error |
+
+## API Versioning
+
+The API version is included in the URL path (`/v1/`). When breaking changes are introduced, a new version will be released (e.g., `/v2/`). We recommend specifying the API version in your integration to ensure compatibility.
+
+## Webhooks
+
+KnowFlow supports webhooks for real-time event notifications. You can configure webhooks in the dashboard under **Settings** → **Webhooks**.
+
+Available events include:
+
+- `conversation.created`
+- `conversation.message.created`
+- `knowledge_base.updated`
+- `app.deployment.updated`
+
+## API Libraries
+
+We provide official client libraries for several programming languages:
+
+<CardGroup cols={3}>
+  <Card title="Python" icon="python" href="https://github.com/knowflow/knowflow-python">
+    pip install knowflow
+  </Card>
+  <Card title="JavaScript" icon="js" href="https://github.com/knowflow/knowflow-js">
+    npm install knowflow
+  </Card>
+  <Card title="PHP" icon="php" href="https://github.com/knowflow/knowflow-php">
+    composer require knowflow/knowflow-php
+  </Card>
+</CardGroup>
+
+## Additional Resources
+
+<CardGroup>
+  <Card title="API Changelog" icon="list-check" href="/api-reference/changelog">
+    Track changes to the API across versions
+  </Card>
+  <Card title="Quickstart Guide" icon="bolt" href="/api-reference/quickstart">
+    Get started with the API quickly
+  </Card>
+  <Card title="Code Examples" icon="code" href="/api-reference/examples">
+    Sample code for common API operations
+  </Card>
+</CardGroup>

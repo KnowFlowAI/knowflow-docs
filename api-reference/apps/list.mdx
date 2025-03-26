@@ -1,0 +1,205 @@
+---
+title: 'List Apps'
+description: 'Retrieve a list of all apps in an organization'
+---
+
+# List Apps
+
+Retrieve a list of all apps in an organization, with options for filtering, sorting, and pagination.
+
+## API Endpoint
+
+```
+GET /api/v1/organizations/{organization_id}/apps
+```
+
+## Request
+
+### Path Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| `organization_id` | string | **Required**. The unique identifier of the organization |
+
+### Headers
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| `Authorization` | string | **Required**. Bearer token for authentication |
+
+### Query Parameters
+
+| Name | Type | Description | Default |
+| ---- | ---- | ----------- | ------- |
+| `limit` | integer | Maximum number of apps to return | 20 |
+| `offset` | integer | Number of apps to skip | 0 |
+| `sort` | string | Field to sort by (`created_at`, `updated_at`, `name`, `type`) | `created_at` |
+| `order` | string | Sort order (`asc` or `desc`) | `desc` |
+| `type` | string | Filter by app type (`chatbot`, `search`, `qa`) | - |
+| `status` | string | Filter by app status (`active`, `inactive`, `archived`) | `active` |
+| `search` | string | Search apps by name or description | - |
+
+## Response
+
+### 200: OK
+
+```json
+{
+  "apps": [
+    {
+      "id": "app_12345abcde",
+      "name": "Customer Support Bot",
+      "description": "AI-powered customer support chatbot",
+      "type": "chatbot",
+      "status": "active",
+      "created_at": "2023-01-15T08:30:00Z",
+      "updated_at": "2023-02-20T14:15:30Z",
+      "usage": {
+        "total_conversations": 150,
+        "total_messages": 750,
+        "last_active": "2023-03-10T15:30:00Z"
+      }
+    },
+    {
+      "id": "app_67890fghij",
+      "name": "Product Search",
+      "description": "Semantic search for product documentation",
+      "type": "search",
+      "status": "active",
+      "created_at": "2023-02-01T10:00:00Z",
+      "updated_at": "2023-03-15T09:45:00Z",
+      "usage": {
+        "total_searches": 500,
+        "total_results": 2500,
+        "last_active": "2023-03-10T16:00:00Z"
+      }
+    }
+  ],
+  "total": 50,
+  "limit": 20,
+  "offset": 0,
+  "has_more": true
+}
+```
+
+### Response Fields
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| `apps` | array | List of apps |
+| `apps[].id` | string | Unique identifier for the app |
+| `apps[].name` | string | Name of the app |
+| `apps[].description` | string | Description of the app |
+| `apps[].type` | string | Type of app |
+| `apps[].status` | string | Current status of the app |
+| `apps[].created_at` | string | Creation date and time in ISO 8601 format |
+| `apps[].updated_at` | string | Last update date and time in ISO 8601 format |
+| `apps[].usage` | object | Usage statistics |
+| `apps[].usage.total_conversations` | integer | Total number of conversations (for chatbots) |
+| `apps[].usage.total_messages` | integer | Total number of messages (for chatbots) |
+| `apps[].usage.total_searches` | integer | Total number of searches (for search apps) |
+| `apps[].usage.total_results` | integer | Total number of results (for search apps) |
+| `apps[].usage.last_active` | string | Last activity timestamp |
+| `total` | integer | Total number of apps |
+| `limit` | integer | Number of apps per page |
+| `offset` | integer | Number of apps skipped |
+| `has_more` | boolean | Whether there are more apps |
+
+### 401: Unauthorized
+
+```json
+{
+  "detail": "Invalid or expired token"
+}
+```
+
+### 403: Forbidden
+
+```json
+{
+  "detail": "Insufficient permissions to view apps"
+}
+```
+
+### 404: Not Found
+
+```json
+{
+  "detail": "Organization not found"
+}
+```
+
+## Code Examples
+
+### cURL
+
+```bash
+curl -X GET "https://api.knowflow.in/api/v1/organizations/org_12345abcde/apps?limit=20&offset=0&sort=created_at&order=desc" \
+  -H "Authorization: Bearer YOUR_API_TOKEN"
+```
+
+### Python
+
+```python
+import requests
+
+organization_id = "org_12345abcde"
+url = f"https://api.knowflow.in/api/v1/organizations/{organization_id}/apps"
+headers = {
+    "Authorization": "Bearer YOUR_API_TOKEN"
+}
+params = {
+    "limit": 20,
+    "offset": 0,
+    "sort": "created_at",
+    "order": "desc"
+}
+
+response = requests.get(url, headers=headers, params=params)
+apps = response.json()
+
+for app in apps["apps"]:
+    print(f"App: {app['name']}")
+    print(f"Type: {app['type']}")
+    print(f"Status: {app['status']}")
+    print(f"Last Active: {app['usage']['last_active']}")
+    print("---")
+```
+
+### JavaScript
+
+```javascript
+const listApps = async (organizationId) => {
+  const response = await fetch(
+    `https://api.knowflow.in/api/v1/organizations/${organizationId}/apps?limit=20&offset=0&sort=created_at&order=desc`,
+    {
+      headers: {
+        'Authorization': 'Bearer YOUR_API_TOKEN'
+      }
+    }
+  );
+  
+  const data = await response.json();
+  
+  data.apps.forEach(app => {
+    console.log(`App: ${app.name}`);
+    console.log(`Type: ${app.type}`);
+    console.log(`Status: ${app.status}`);
+    console.log(`Last Active: ${app.usage.last_active}`);
+    console.log('---');
+  });
+};
+
+listApps('org_12345abcde');
+```
+
+## Important Notes
+
+- Apps are paginated with a default limit of 20 per page.
+- Use the `offset` parameter to navigate through pages.
+- The `has_more` field indicates if there are more apps to load.
+- Apps can be filtered by type, status, and searched by name or description.
+- The response includes basic app information and usage statistics.
+- Apps are sorted by creation date by default, but can be sorted by other fields.
+- Inactive and archived apps are not included by default, but can be accessed using the `status` filter.
+- Usage statistics vary based on the app type (chatbot vs search). 

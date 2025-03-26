@@ -1,0 +1,277 @@
+---
+title: 'Update Knowledge Base'
+description: 'Update an existing knowledge base'
+---
+
+# Update Knowledge Base
+
+Update an existing knowledge base by its ID.
+
+## API Endpoint
+
+```
+PUT /api/v1/organizations/{organization_id}/knowledge-bases/{knowledge_base_id}
+```
+
+## Request
+
+### Path Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| `organization_id` | string | **Required**. The unique identifier of the organization |
+| `knowledge_base_id` | string | **Required**. The unique identifier of the knowledge base |
+
+### Headers
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| `Authorization` | string | **Required**. Bearer token for authentication |
+| `Content-Type` | string | **Required**. Must be `application/json` |
+
+### Request Body
+
+```json
+{
+  "name": "Updated Knowledge Base Name",
+  "description": "Updated description for our knowledge base",
+  "settings": {
+    "language": "fr",
+    "indexing": {
+      "enabled": true,
+      "schedule": "weekly"
+    },
+    "search": {
+      "fuzzy_matching": true,
+      "max_results": 20
+    }
+  }
+}
+```
+
+### Request Fields
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| `name` | string | Optional. New name for the knowledge base (1-100 characters) |
+| `description` | string | Optional. New description for the knowledge base (0-500 characters) |
+| `settings` | object | Optional. Updated knowledge base settings |
+| `settings.language` | string | Optional. Primary language of the content (e.g., "en", "fr", "es") |
+| `settings.indexing` | object | Optional. Indexing settings |
+| `settings.indexing.enabled` | boolean | Optional. Whether indexing is enabled |
+| `settings.indexing.schedule` | string | Optional. Indexing schedule ("daily", "weekly", "monthly") |
+| `settings.search` | object | Optional. Search settings |
+| `settings.search.fuzzy_matching` | boolean | Optional. Whether fuzzy matching is enabled |
+| `settings.search.max_results` | integer | Optional. Maximum number of search results |
+
+## Response
+
+### 200: OK
+
+```json
+{
+  "id": "kb_12345abcde",
+  "name": "Updated Knowledge Base Name",
+  "description": "Updated description for our knowledge base",
+  "created_at": "2023-01-15T08:30:00Z",
+  "updated_at": "2023-03-15T14:20:00Z",
+  "document_count": 150,
+  "total_size": 5242880,
+  "last_synced_at": "2023-03-10T15:30:00Z",
+  "status": "active",
+  "settings": {
+    "language": "fr",
+    "indexing": {
+      "enabled": true,
+      "schedule": "weekly",
+      "last_run": "2023-03-10T15:30:00Z"
+    },
+    "search": {
+      "fuzzy_matching": true,
+      "max_results": 20
+    }
+  },
+  "documents": [
+    {
+      "id": "doc_12345abcde",
+      "name": "Getting Started Guide",
+      "type": "markdown",
+      "size": 10240,
+      "created_at": "2023-01-15T08:30:00Z",
+      "updated_at": "2023-02-20T14:15:30Z",
+      "status": "indexed"
+    }
+  ]
+}
+```
+
+### Response Fields
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| `id` | string | Unique identifier of the knowledge base |
+| `name` | string | Updated name of the knowledge base |
+| `description` | string | Updated description of the knowledge base |
+| `created_at` | string | Original creation date and time in ISO 8601 format |
+| `updated_at` | string | Last update date and time in ISO 8601 format |
+| `document_count` | integer | Number of documents in the knowledge base |
+| `total_size` | integer | Total size of all documents in bytes |
+| `last_synced_at` | string | Last synchronization date and time |
+| `status` | string | Current status of the knowledge base |
+| `settings` | object | Updated knowledge base settings |
+| `settings.language` | string | Primary language of the content |
+| `settings.indexing` | object | Indexing settings |
+| `settings.indexing.enabled` | boolean | Whether indexing is enabled |
+| `settings.indexing.schedule` | string | Indexing schedule |
+| `settings.indexing.last_run` | string | Last indexing run time |
+| `settings.search` | object | Search settings |
+| `settings.search.fuzzy_matching` | boolean | Whether fuzzy matching is enabled |
+| `settings.search.max_results` | integer | Maximum number of search results |
+| `documents` | array | List of documents in the knowledge base |
+| `documents[].id` | string | Document unique identifier |
+| `documents[].name` | string | Document name |
+| `documents[].type` | string | Document type |
+| `documents[].size` | integer | Document size in bytes |
+| `documents[].created_at` | string | Document creation date |
+| `documents[].updated_at` | string | Document last update date |
+| `documents[].status` | string | Document processing status |
+
+### 400: Bad Request
+
+```json
+{
+  "detail": "Invalid request",
+  "errors": {
+    "name": "Name must be between 1 and 100 characters"
+  }
+}
+```
+
+### 401: Unauthorized
+
+```json
+{
+  "detail": "Invalid or expired token"
+}
+```
+
+### 403: Forbidden
+
+```json
+{
+  "detail": "Insufficient permissions to update this knowledge base"
+}
+```
+
+### 404: Not Found
+
+```json
+{
+  "detail": "Knowledge base not found"
+}
+```
+
+### 409: Conflict
+
+```json
+{
+  "detail": "A knowledge base with this name already exists"
+}
+```
+
+## Code Examples
+
+### cURL
+
+```bash
+curl -X PUT "https://api.knowflow.in/api/v1/organizations/org_12345abcde/knowledge-bases/kb_12345abcde" \
+  -H "Authorization: Bearer YOUR_API_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "Updated Knowledge Base Name",
+    "description": "Updated description for our knowledge base",
+    "settings": {
+      "language": "fr",
+      "indexing": {
+        "enabled": true,
+        "schedule": "weekly"
+      },
+      "search": {
+        "fuzzy_matching": true,
+        "max_results": 20
+      }
+    }
+  }'
+```
+
+### Python
+
+```python
+import requests
+
+organization_id = "org_12345abcde"
+knowledge_base_id = "kb_12345abcde"
+url = f"https://api.knowflow.in/api/v1/organizations/{organization_id}/knowledge-bases/{knowledge_base_id}"
+headers = {
+    "Authorization": "Bearer YOUR_API_TOKEN",
+    "Content-Type": "application/json"
+}
+data = {
+    "name": "Updated Knowledge Base Name",
+    "description": "Updated description for our knowledge base",
+    "settings": {
+        "language": "fr",
+        "indexing": {
+            "enabled": True,
+            "schedule": "weekly"
+        },
+        "search": {
+            "fuzzy_matching": True,
+            "max_results": 20
+        }
+    }
+}
+
+response = requests.put(url, headers=headers, json=data)
+knowledge_base = response.json()
+
+print(f"Updated knowledge base: {knowledge_base['name']}")
+```
+
+### JavaScript
+
+```javascript
+const updateKnowledgeBase = async (organizationId, knowledgeBaseId) => {
+  const response = await fetch(
+    `https://api.knowflow.in/api/v1/organizations/${organizationId}/knowledge-bases/${knowledgeBaseId}`,
+    {
+      method: 'PUT',
+      headers: {
+        'Authorization': 'Bearer YOUR_API_TOKEN',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        name: 'Updated Knowledge Base Name',
+        description: 'Updated description for our knowledge base',
+        settings: {
+          language: 'fr',
+          indexing: {
+            enabled: true,
+            schedule: 'weekly'
+          },
+          search: {
+            fuzzy_matching: true,
+            max_results: 20
+          }
+        }
+      })
+    }
+  );
+  
+  const knowledgeBase = await response.json();
+  
+  console.log(`Updated knowledge base: ${knowledgeBase.name}`);
+};
+
+updateKnowledgeBase('org_12345abcde', 'kb_12345abcde');
+``` 

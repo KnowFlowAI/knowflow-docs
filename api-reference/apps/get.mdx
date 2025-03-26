@@ -1,0 +1,175 @@
+---
+title: 'Get App'
+description: 'Retrieve detailed information about a specific app'
+---
+
+# Get App
+
+Retrieve detailed information about a specific app by its ID.
+
+## API Endpoint
+
+```
+GET /api/v1/organizations/{organization_id}/apps/{app_id}
+```
+
+## Request
+
+### Path Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| `organization_id` | string | **Required**. The unique identifier of the organization |
+| `app_id` | string | **Required**. The unique identifier of the app |
+
+### Headers
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| `Authorization` | string | **Required**. Bearer token for authentication |
+
+## Response
+
+### 200: OK
+
+```json
+{
+  "id": "app_12345abcde",
+  "name": "Customer Support Bot",
+  "description": "AI-powered customer support chatbot",
+  "created_at": "2023-01-15T08:30:00Z",
+  "updated_at": "2023-02-20T14:15:30Z",
+  "status": "active",
+  "type": "chatbot",
+  "settings": {
+    "model": "gpt-4",
+    "temperature": 0.7,
+    "max_tokens": 1000,
+    "knowledge_base_id": "kb_12345abcde",
+    "prompt_template": "You are a helpful customer support assistant...",
+    "conversation_history": true,
+    "max_history": 10
+  },
+  "usage": {
+    "total_conversations": 150,
+    "total_messages": 750,
+    "last_active": "2023-03-10T15:30:00Z"
+  },
+  "permissions": {
+    "public": false,
+    "allowed_domains": ["example.com"],
+    "rate_limit": {
+      "requests_per_minute": 60
+    }
+  }
+}
+```
+
+### Response Fields
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| `id` | string | Unique identifier for the app |
+| `name` | string | Name of the app |
+| `description` | string | Description of the app |
+| `created_at` | string | Creation date and time in ISO 8601 format |
+| `updated_at` | string | Last update date and time in ISO 8601 format |
+| `status` | string | Current status of the app |
+| `type` | string | Type of app (e.g., "chatbot", "search", "qa") |
+| `settings` | object | App configuration settings |
+| `settings.model` | string | AI model used by the app |
+| `settings.temperature` | number | Temperature setting for model responses |
+| `settings.max_tokens` | integer | Maximum tokens per response |
+| `settings.knowledge_base_id` | string | Associated knowledge base ID |
+| `settings.prompt_template` | string | Custom prompt template |
+| `settings.conversation_history` | boolean | Whether to maintain conversation history |
+| `settings.max_history` | integer | Maximum number of messages to keep in history |
+| `usage` | object | Usage statistics |
+| `usage.total_conversations` | integer | Total number of conversations |
+| `usage.total_messages` | integer | Total number of messages |
+| `usage.last_active` | string | Last activity timestamp |
+| `permissions` | object | Access and rate limiting settings |
+| `permissions.public` | boolean | Whether the app is publicly accessible |
+| `permissions.allowed_domains` | array | List of allowed domains |
+| `permissions.rate_limit` | object | Rate limiting configuration |
+| `permissions.rate_limit.requests_per_minute` | integer | Maximum requests per minute |
+
+### 401: Unauthorized
+
+```json
+{
+  "detail": "Invalid or expired token"
+}
+```
+
+### 403: Forbidden
+
+```json
+{
+  "detail": "Insufficient permissions to access this app"
+}
+```
+
+### 404: Not Found
+
+```json
+{
+  "detail": "App not found"
+}
+```
+
+## Code Examples
+
+### cURL
+
+```bash
+curl -X GET "https://api.knowflow.in/api/v1/organizations/org_12345abcde/apps/app_12345abcde" \
+  -H "Authorization: Bearer YOUR_API_TOKEN"
+```
+
+### Python
+
+```python
+import requests
+
+organization_id = "org_12345abcde"
+app_id = "app_12345abcde"
+url = f"https://api.knowflow.in/api/v1/organizations/{organization_id}/apps/{app_id}"
+headers = {
+    "Authorization": "Bearer YOUR_API_TOKEN"
+}
+
+response = requests.get(url, headers=headers)
+app = response.json()
+
+print(f"App: {app['name']}")
+print(f"Type: {app['type']}")
+print(f"Status: {app['status']}")
+print(f"Total Conversations: {app['usage']['total_conversations']}")
+```
+
+### JavaScript
+
+```javascript
+const getApp = async (organizationId, appId) => {
+  const response = await fetch(
+    `https://api.knowflow.in/api/v1/organizations/${organizationId}/apps/${appId}`,
+    {
+      method: 'GET',
+      headers: {
+        'Authorization': 'Bearer YOUR_API_TOKEN',
+        'Content-Type': 'application/json'
+      }
+    }
+  );
+  
+  const app = await response.json();
+  
+  console.log(`App: ${app.name}`);
+  console.log(`Type: ${app.type}`);
+  console.log(`Status: ${app.status}`);
+  console.log(`Total Conversations: ${app.usage.total_conversations}`);
+};
+
+getApp('org_12345abcde', 'app_12345abcde');
+``` 

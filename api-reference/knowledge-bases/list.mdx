@@ -1,0 +1,175 @@
+---
+title: 'List Knowledge Bases'
+description: 'Get a list of all knowledge bases in an organization'
+---
+
+# List Knowledge Bases
+
+Retrieve a list of all knowledge bases in the specified organization.
+
+## API Endpoint
+
+```
+GET /api/v1/organizations/{organization_id}/knowledge-bases
+```
+
+## Request
+
+### Path Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| `organization_id` | string | **Required**. The unique identifier of the organization |
+
+### Headers
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| `Authorization` | string | **Required**. Bearer token for authentication |
+
+### Query Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| `limit` | integer | Maximum number of knowledge bases to return. Default: 50 |
+| `offset` | integer | Number of knowledge bases to skip. Default: 0 |
+| `sort` | string | Field to sort by. Options: `name`, `created_at`, `updated_at`. Default: `created_at` |
+| `order` | string | Sort order. Options: `asc`, `desc`. Default: `desc` |
+
+## Response
+
+### 200: OK
+
+```json
+{
+  "knowledge_bases": [
+    {
+      "id": "kb_12345abcde",
+      "name": "Product Documentation",
+      "description": "Technical documentation for our products",
+      "created_at": "2023-01-15T08:30:00Z",
+      "updated_at": "2023-02-20T14:15:30Z",
+      "document_count": 150,
+      "total_size": 5242880,
+      "last_synced_at": "2023-03-10T15:30:00Z",
+      "status": "active"
+    },
+    {
+      "id": "kb_67890fghij",
+      "name": "Customer Support",
+      "description": "Customer support knowledge base",
+      "created_at": "2023-03-05T10:00:00Z",
+      "updated_at": "2023-03-05T10:00:00Z",
+      "document_count": 75,
+      "total_size": 2621440,
+      "last_synced_at": "2023-03-10T15:30:00Z",
+      "status": "active"
+    }
+  ],
+  "total": 2,
+  "limit": 50,
+  "offset": 0
+}
+```
+
+### Response Fields
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| `knowledge_bases` | array | List of knowledge base objects |
+| `knowledge_bases[].id` | string | Unique identifier for the knowledge base |
+| `knowledge_bases[].name` | string | Name of the knowledge base |
+| `knowledge_bases[].description` | string | Description of the knowledge base |
+| `knowledge_bases[].created_at` | string | Creation date and time in ISO 8601 format |
+| `knowledge_bases[].updated_at` | string | Last update date and time in ISO 8601 format |
+| `knowledge_bases[].document_count` | integer | Number of documents in the knowledge base |
+| `knowledge_bases[].total_size` | integer | Total size of all documents in bytes |
+| `knowledge_bases[].last_synced_at` | string | Last synchronization date and time |
+| `knowledge_bases[].status` | string | Current status of the knowledge base |
+| `total` | integer | Total number of knowledge bases available |
+| `limit` | integer | Limit used in the request |
+| `offset` | integer | Offset used in the request |
+
+### 401: Unauthorized
+
+```json
+{
+  "detail": "Invalid or expired token"
+}
+```
+
+### 403: Forbidden
+
+```json
+{
+  "detail": "Insufficient permissions to access this organization"
+}
+```
+
+### 404: Not Found
+
+```json
+{
+  "detail": "Organization not found"
+}
+```
+
+## Code Examples
+
+### cURL
+
+```bash
+curl -X GET "https://api.knowflow.in/api/v1/organizations/org_12345abcde/knowledge-bases?limit=10&offset=0" \
+  -H "Authorization: Bearer YOUR_API_TOKEN"
+```
+
+### Python
+
+```python
+import requests
+
+organization_id = "org_12345abcde"
+url = f"https://api.knowflow.in/api/v1/organizations/{organization_id}/knowledge-bases"
+headers = {
+    "Authorization": "Bearer YOUR_API_TOKEN"
+}
+params = {
+    "limit": 10,
+    "offset": 0,
+    "sort": "name",
+    "order": "asc"
+}
+
+response = requests.get(url, headers=headers, params=params)
+data = response.json()
+
+for kb in data["knowledge_bases"]:
+    print(f"Knowledge Base: {kb['name']}")
+    print(f"Documents: {kb['document_count']}")
+```
+
+### JavaScript
+
+```javascript
+const fetchKnowledgeBases = async (organizationId) => {
+  const response = await fetch(
+    `https://api.knowflow.in/api/v1/organizations/${organizationId}/knowledge-bases?limit=10&offset=0`,
+    {
+      method: 'GET',
+      headers: {
+        'Authorization': 'Bearer YOUR_API_TOKEN',
+        'Content-Type': 'application/json'
+      }
+    }
+  );
+  
+  const data = await response.json();
+  
+  data.knowledge_bases.forEach(kb => {
+    console.log(`Knowledge Base: ${kb.name}`);
+    console.log(`Documents: ${kb.document_count}`);
+  });
+};
+
+fetchKnowledgeBases('org_12345abcde');
+``` 

@@ -1,0 +1,260 @@
+---
+title: 'Send Message'
+description: 'Send a message to an app and get a response'
+---
+
+# Send Message
+
+Send a message to an app and receive a response. This endpoint supports both single-turn conversations and multi-turn conversations with context.
+
+## API Endpoint
+
+```
+POST /api/v1/organizations/{organization_id}/apps/{app_id}/chat
+```
+
+## Request
+
+### Path Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| `organization_id` | string | **Required**. The unique identifier of the organization |
+| `app_id` | string | **Required**. The unique identifier of the app |
+
+### Headers
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| `Authorization` | string | **Required**. Bearer token for authentication |
+| `Content-Type` | string | **Required**. Must be `application/json` |
+
+### Request Body
+
+```json
+{
+  "message": "What are the key features of your product?",
+  "conversation_id": "conv_12345abcde",
+  "context": {
+    "user_id": "user_12345abcde",
+    "session_id": "sess_12345abcde",
+    "metadata": {
+      "browser": "Chrome",
+      "platform": "Web",
+      "language": "en-US"
+    }
+  }
+}
+```
+
+### Request Fields
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| `message` | string | **Required**. The message to send to the app |
+| `conversation_id` | string | Optional. ID of an existing conversation for context |
+| `context` | object | Optional. Additional context for the message |
+| `context.user_id` | string | Optional. ID of the user sending the message |
+| `context.session_id` | string | Optional. ID of the current session |
+| `context.metadata` | object | Optional. Additional metadata about the request |
+
+## Response
+
+### 200: OK
+
+```json
+{
+  "id": "msg_12345abcde",
+  "conversation_id": "conv_12345abcde",
+  "message": "What are the key features of your product?",
+  "response": "Our product offers several key features:\n\n1. Natural Language Processing\n2. Knowledge Base Integration\n3. Multi-turn Conversations\n4. Customizable Responses\n5. Analytics Dashboard",
+  "created_at": "2023-03-10T15:30:00Z",
+  "tokens": {
+    "prompt": 15,
+    "completion": 85,
+    "total": 100
+  },
+  "sources": [
+    {
+      "id": "doc_12345abcde",
+      "name": "Product Overview",
+      "relevance": 0.95
+    }
+  ],
+  "context": {
+    "user_id": "user_12345abcde",
+    "session_id": "sess_12345abcde",
+    "metadata": {
+      "browser": "Chrome",
+      "platform": "Web",
+      "language": "en-US"
+    }
+  }
+}
+```
+
+### Response Fields
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| `id` | string | Unique identifier for the message |
+| `conversation_id` | string | ID of the conversation |
+| `message` | string | Original message sent to the app |
+| `response` | string | App's response to the message |
+| `created_at` | string | Message creation timestamp |
+| `tokens` | object | Token usage statistics |
+| `tokens.prompt` | integer | Number of tokens in the prompt |
+| `tokens.completion` | integer | Number of tokens in the completion |
+| `tokens.total` | integer | Total number of tokens used |
+| `sources` | array | List of relevant knowledge base documents |
+| `sources[].id` | string | Document ID |
+| `sources[].name` | string | Document name |
+| `sources[].relevance` | number | Relevance score (0-1) |
+| `context` | object | Context information |
+
+### 400: Bad Request
+
+```json
+{
+  "detail": "Invalid request",
+  "errors": {
+    "message": "Message is required"
+  }
+}
+```
+
+### 401: Unauthorized
+
+```json
+{
+  "detail": "Invalid or expired token"
+}
+```
+
+### 403: Forbidden
+
+```json
+{
+  "detail": "Insufficient permissions to use this app"
+}
+```
+
+### 404: Not Found
+
+```json
+{
+  "detail": "App not found"
+}
+```
+
+### 429: Too Many Requests
+
+```json
+{
+  "detail": "Rate limit exceeded",
+  "retry_after": 60
+}
+```
+
+## Code Examples
+
+### cURL
+
+```bash
+curl -X POST "https://api.knowflow.in/api/v1/organizations/org_12345abcde/apps/app_12345abcde/chat" \
+  -H "Authorization: Bearer YOUR_API_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "message": "What are the key features of your product?",
+    "conversation_id": "conv_12345abcde",
+    "context": {
+      "user_id": "user_12345abcde",
+      "session_id": "sess_12345abcde",
+      "metadata": {
+        "browser": "Chrome",
+        "platform": "Web",
+        "language": "en-US"
+      }
+    }
+  }'
+```
+
+### Python
+
+```python
+import requests
+
+organization_id = "org_12345abcde"
+app_id = "app_12345abcde"
+url = f"https://api.knowflow.in/api/v1/organizations/{organization_id}/apps/{app_id}/chat"
+headers = {
+    "Authorization": "Bearer YOUR_API_TOKEN",
+    "Content-Type": "application/json"
+}
+data = {
+    "message": "What are the key features of your product?",
+    "conversation_id": "conv_12345abcde",
+    "context": {
+        "user_id": "user_12345abcde",
+        "session_id": "sess_12345abcde",
+        "metadata": {
+            "browser": "Chrome",
+            "platform": "Web",
+            "language": "en-US"
+        }
+    }
+}
+
+response = requests.post(url, headers=headers, json=data)
+chat_response = response.json()
+
+print(f"Response: {chat_response['response']}")
+print(f"Tokens used: {chat_response['tokens']['total']}")
+```
+
+### JavaScript
+
+```javascript
+const sendMessage = async (organizationId, appId) => {
+  const response = await fetch(
+    `https://api.knowflow.in/api/v1/organizations/${organizationId}/apps/${appId}/chat`,
+    {
+      method: 'POST',
+      headers: {
+        'Authorization': 'Bearer YOUR_API_TOKEN',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        message: 'What are the key features of your product?',
+        conversation_id: 'conv_12345abcde',
+        context: {
+          user_id: 'user_12345abcde',
+          session_id: 'sess_12345abcde',
+          metadata: {
+            browser: 'Chrome',
+            platform: 'Web',
+            language: 'en-US'
+          }
+        }
+      })
+    }
+  );
+  
+  const chatResponse = await response.json();
+  
+  console.log(`Response: ${chatResponse.response}`);
+  console.log(`Tokens used: ${chatResponse.tokens.total}`);
+};
+
+sendMessage('org_12345abcde', 'app_12345abcde');
+```
+
+## Important Notes
+
+- The response time may vary depending on the complexity of the request and the app's configuration.
+- For multi-turn conversations, include the `conversation_id` to maintain context.
+- The app may use information from the knowledge base to generate responses, which will be included in the `sources` field.
+- Rate limiting is applied per app and per user.
+- The `context` field can be used to provide additional information that may help the app generate more relevant responses.
+- Token usage is tracked and reported in the response.
+- Responses are streamed for better performance with large responses. 

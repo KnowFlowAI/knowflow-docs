@@ -1,0 +1,190 @@
+---
+title: 'Get Conversations'
+description: 'Retrieve a list of conversations for an app'
+---
+
+# Get Conversations
+
+Retrieve a list of conversations for a specific app, with options for filtering, sorting, and pagination.
+
+## API Endpoint
+
+```
+GET /api/v1/organizations/{organization_id}/apps/{app_id}/conversations
+```
+
+## Request
+
+### Path Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| `organization_id` | string | **Required**. The unique identifier of the organization |
+| `app_id` | string | **Required**. The unique identifier of the app |
+
+### Headers
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| `Authorization` | string | **Required**. Bearer token for authentication |
+
+### Query Parameters
+
+| Name | Type | Description | Default |
+| ---- | ---- | ----------- | ------- |
+| `limit` | integer | Maximum number of conversations to return | 20 |
+| `offset` | integer | Number of conversations to skip | 0 |
+| `sort` | string | Field to sort by (`created_at`, `updated_at`, `message_count`) | `created_at` |
+| `order` | string | Sort order (`asc` or `desc`) | `desc` |
+| `status` | string | Filter by conversation status (`active`, `archived`, `deleted`) | `active` |
+| `user_id` | string | Filter by user ID | - |
+| `start_date` | string | Filter by start date (ISO 8601) | - |
+| `end_date` | string | Filter by end date (ISO 8601) | - |
+
+## Response
+
+### 200: OK
+
+```json
+{
+  "conversations": [
+    {
+      "id": "conv_12345abcde",
+      "app_id": "app_12345abcde",
+      "user_id": "user_12345abcde",
+      "status": "active",
+      "message_count": 5,
+      "last_message": "What are the key features of your product?",
+      "last_message_at": "2023-03-10T15:30:00Z",
+      "created_at": "2023-03-10T15:00:00Z",
+      "updated_at": "2023-03-10T15:30:00Z",
+      "metadata": {
+        "browser": "Chrome",
+        "platform": "Web",
+        "language": "en-US"
+      }
+    }
+  ],
+  "total": 100,
+  "limit": 20,
+  "offset": 0,
+  "has_more": true
+}
+```
+
+### Response Fields
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| `conversations` | array | List of conversations |
+| `conversations[].id` | string | Unique identifier for the conversation |
+| `conversations[].app_id` | string | ID of the app |
+| `conversations[].user_id` | string | ID of the user |
+| `conversations[].status` | string | Conversation status |
+| `conversations[].message_count` | integer | Number of messages in the conversation |
+| `conversations[].last_message` | string | Last message in the conversation |
+| `conversations[].last_message_at` | string | Timestamp of the last message |
+| `conversations[].created_at` | string | Conversation creation timestamp |
+| `conversations[].updated_at` | string | Last update timestamp |
+| `conversations[].metadata` | object | Additional metadata |
+| `total` | integer | Total number of conversations |
+| `limit` | integer | Number of conversations per page |
+| `offset` | integer | Number of conversations skipped |
+| `has_more` | boolean | Whether there are more conversations |
+
+### 401: Unauthorized
+
+```json
+{
+  "detail": "Invalid or expired token"
+}
+```
+
+### 403: Forbidden
+
+```json
+{
+  "detail": "Insufficient permissions to view conversations"
+}
+```
+
+### 404: Not Found
+
+```json
+{
+  "detail": "App not found"
+}
+```
+
+## Code Examples
+
+### cURL
+
+```bash
+curl -X GET "https://api.knowflow.in/api/v1/organizations/org_12345abcde/apps/app_12345abcde/conversations?limit=20&offset=0&sort=created_at&order=desc" \
+  -H "Authorization: Bearer YOUR_API_TOKEN"
+```
+
+### Python
+
+```python
+import requests
+
+organization_id = "org_12345abcde"
+app_id = "app_12345abcde"
+url = f"https://api.knowflow.in/api/v1/organizations/{organization_id}/apps/{app_id}/conversations"
+headers = {
+    "Authorization": "Bearer YOUR_API_TOKEN"
+}
+params = {
+    "limit": 20,
+    "offset": 0,
+    "sort": "created_at",
+    "order": "desc"
+}
+
+response = requests.get(url, headers=headers, params=params)
+conversations = response.json()
+
+for conv in conversations["conversations"]:
+    print(f"Conversation ID: {conv['id']}")
+    print(f"Message Count: {conv['message_count']}")
+    print(f"Last Message: {conv['last_message']}")
+    print("---")
+```
+
+### JavaScript
+
+```javascript
+const getConversations = async (organizationId, appId) => {
+  const response = await fetch(
+    `https://api.knowflow.in/api/v1/organizations/${organizationId}/apps/${appId}/conversations?limit=20&offset=0&sort=created_at&order=desc`,
+    {
+      headers: {
+        'Authorization': 'Bearer YOUR_API_TOKEN'
+      }
+    }
+  );
+  
+  const data = await response.json();
+  
+  data.conversations.forEach(conv => {
+    console.log(`Conversation ID: ${conv.id}`);
+    console.log(`Message Count: ${conv.message_count}`);
+    console.log(`Last Message: ${conv.last_message}`);
+    console.log('---');
+  });
+};
+
+getConversations('org_12345abcde', 'app_12345abcde');
+```
+
+## Important Notes
+
+- Conversations are paginated with a default limit of 20 per page.
+- Use the `offset` parameter to navigate through pages.
+- The `has_more` field indicates if there are more conversations to load.
+- Conversations can be filtered by status, user ID, and date range.
+- The response includes metadata about the conversation such as browser and platform information.
+- Conversations are sorted by creation date by default, but can be sorted by other fields.
+- Archived and deleted conversations are not included by default, but can be accessed using the `status` filter. 

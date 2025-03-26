@@ -1,0 +1,188 @@
+---
+title: 'Get Knowledge Base'
+description: 'Retrieve detailed information about a specific knowledge base'
+---
+
+# Get Knowledge Base
+
+Retrieve detailed information about a specific knowledge base by its ID.
+
+## API Endpoint
+
+```
+GET /api/v1/organizations/{organization_id}/knowledge-bases/{knowledge_base_id}
+```
+
+## Request
+
+### Path Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| `organization_id` | string | **Required**. The unique identifier of the organization |
+| `knowledge_base_id` | string | **Required**. The unique identifier of the knowledge base |
+
+### Headers
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| `Authorization` | string | **Required**. Bearer token for authentication |
+
+## Response
+
+### 200: OK
+
+```json
+{
+  "id": "kb_12345abcde",
+  "name": "Product Documentation",
+  "description": "Technical documentation for our products",
+  "created_at": "2023-01-15T08:30:00Z",
+  "updated_at": "2023-02-20T14:15:30Z",
+  "document_count": 150,
+  "total_size": 5242880,
+  "last_synced_at": "2023-03-10T15:30:00Z",
+  "status": "active",
+  "settings": {
+    "language": "en",
+    "indexing": {
+      "enabled": true,
+      "schedule": "daily",
+      "last_run": "2023-03-10T15:30:00Z"
+    },
+    "search": {
+      "fuzzy_matching": true,
+      "max_results": 10
+    }
+  },
+  "documents": [
+    {
+      "id": "doc_12345abcde",
+      "name": "Getting Started Guide",
+      "type": "markdown",
+      "size": 10240,
+      "created_at": "2023-01-15T08:30:00Z",
+      "updated_at": "2023-02-20T14:15:30Z",
+      "status": "indexed"
+    },
+    {
+      "id": "doc_67890fghij",
+      "name": "API Reference",
+      "type": "markdown",
+      "size": 20480,
+      "created_at": "2023-01-16T10:45:00Z",
+      "updated_at": "2023-02-21T09:30:00Z",
+      "status": "indexed"
+    }
+  ]
+}
+```
+
+### Response Fields
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| `id` | string | Unique identifier for the knowledge base |
+| `name` | string | Name of the knowledge base |
+| `description` | string | Description of the knowledge base |
+| `created_at` | string | Creation date and time in ISO 8601 format |
+| `updated_at` | string | Last update date and time in ISO 8601 format |
+| `document_count` | integer | Number of documents in the knowledge base |
+| `total_size` | integer | Total size of all documents in bytes |
+| `last_synced_at` | string | Last synchronization date and time |
+| `status` | string | Current status of the knowledge base |
+| `settings` | object | Knowledge base settings |
+| `settings.language` | string | Primary language of the content |
+| `settings.indexing` | object | Indexing settings |
+| `settings.indexing.enabled` | boolean | Whether indexing is enabled |
+| `settings.indexing.schedule` | string | Indexing schedule |
+| `settings.indexing.last_run` | string | Last indexing run time |
+| `settings.search` | object | Search settings |
+| `settings.search.fuzzy_matching` | boolean | Whether fuzzy matching is enabled |
+| `settings.search.max_results` | integer | Maximum number of search results |
+| `documents` | array | List of documents in the knowledge base |
+| `documents[].id` | string | Document unique identifier |
+| `documents[].name` | string | Document name |
+| `documents[].type` | string | Document type |
+| `documents[].size` | integer | Document size in bytes |
+| `documents[].created_at` | string | Document creation date |
+| `documents[].updated_at` | string | Document last update date |
+| `documents[].status` | string | Document processing status |
+
+### 401: Unauthorized
+
+```json
+{
+  "detail": "Invalid or expired token"
+}
+```
+
+### 403: Forbidden
+
+```json
+{
+  "detail": "Insufficient permissions to access this knowledge base"
+}
+```
+
+### 404: Not Found
+
+```json
+{
+  "detail": "Knowledge base not found"
+}
+```
+
+## Code Examples
+
+### cURL
+
+```bash
+curl -X GET "https://api.knowflow.in/api/v1/organizations/org_12345abcde/knowledge-bases/kb_12345abcde" \
+  -H "Authorization: Bearer YOUR_API_TOKEN"
+```
+
+### Python
+
+```python
+import requests
+
+organization_id = "org_12345abcde"
+knowledge_base_id = "kb_12345abcde"
+url = f"https://api.knowflow.in/api/v1/organizations/{organization_id}/knowledge-bases/{knowledge_base_id}"
+headers = {
+    "Authorization": "Bearer YOUR_API_TOKEN"
+}
+
+response = requests.get(url, headers=headers)
+knowledge_base = response.json()
+
+print(f"Knowledge Base: {knowledge_base['name']}")
+print(f"Documents: {knowledge_base['document_count']}")
+print(f"Status: {knowledge_base['status']}")
+```
+
+### JavaScript
+
+```javascript
+const getKnowledgeBase = async (organizationId, knowledgeBaseId) => {
+  const response = await fetch(
+    `https://api.knowflow.in/api/v1/organizations/${organizationId}/knowledge-bases/${knowledgeBaseId}`,
+    {
+      method: 'GET',
+      headers: {
+        'Authorization': 'Bearer YOUR_API_TOKEN',
+        'Content-Type': 'application/json'
+      }
+    }
+  );
+  
+  const knowledgeBase = await response.json();
+  
+  console.log(`Knowledge Base: ${knowledgeBase.name}`);
+  console.log(`Documents: ${knowledgeBase.document_count}`);
+  console.log(`Status: ${knowledgeBase.status}`);
+};
+
+getKnowledgeBase('org_12345abcde', 'kb_12345abcde');
+``` 

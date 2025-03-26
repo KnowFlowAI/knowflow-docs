@@ -1,0 +1,137 @@
+---
+title: 'Delete Organization'
+description: 'Delete an existing organization'
+---
+
+# Delete Organization
+
+Delete an existing organization by its ID. This action is irreversible and will permanently remove all associated data, including knowledge bases, apps, and member associations.
+
+## API Endpoint
+
+```
+DELETE /api/v1/organizations/{organization_id}
+```
+
+## Request
+
+### Path Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| `organization_id` | string | **Required**. The unique identifier of the organization |
+
+### Headers
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| `Authorization` | string | **Required**. Bearer token for authentication |
+
+## Response
+
+### 204: No Content
+
+A successful deletion returns a 204 status code with no response body.
+
+### 401: Unauthorized
+
+```json
+{
+  "detail": "Invalid or expired token"
+}
+```
+
+### 403: Forbidden
+
+```json
+{
+  "detail": "Insufficient permissions to delete this organization"
+}
+```
+
+<Note>
+Only the organization owner has permission to delete an organization.
+</Note>
+
+### 404: Not Found
+
+```json
+{
+  "detail": "Organization not found"
+}
+```
+
+### 409: Conflict
+
+```json
+{
+  "detail": "Cannot delete organization with active subscriptions"
+}
+```
+
+## Code Examples
+
+### cURL
+
+```bash
+curl -X DELETE "https://api.knowflow.in/api/v1/organizations/org_12345abcde" \
+  -H "Authorization: Bearer YOUR_API_TOKEN"
+```
+
+### Python
+
+```python
+import requests
+
+organization_id = "org_12345abcde"
+url = f"https://api.knowflow.in/api/v1/organizations/{organization_id}"
+headers = {
+    "Authorization": "Bearer YOUR_API_TOKEN"
+}
+
+response = requests.delete(url, headers=headers)
+
+if response.status_code == 204:
+    print(f"Organization {organization_id} successfully deleted")
+else:
+    print(f"Failed to delete organization: {response.json()['detail']}")
+```
+
+### JavaScript
+
+```javascript
+const deleteOrganization = async (organizationId) => {
+  try {
+    const response = await fetch(`https://api.knowflow.in/api/v1/organizations/${organizationId}`, {
+      method: 'DELETE',
+      headers: {
+        'Authorization': 'Bearer YOUR_API_TOKEN'
+      }
+    });
+    
+    if (response.status === 204) {
+      console.log(`Organization ${organizationId} successfully deleted`);
+    } else {
+      const error = await response.json();
+      console.error(`Failed to delete organization: ${error.detail}`);
+    }
+  } catch (error) {
+    console.error('Error deleting organization:', error);
+  }
+};
+
+deleteOrganization('org_12345abcde');
+```
+
+## Important Notes
+
+- **This action is permanent and cannot be undone.**
+- All data associated with the organization will be permanently deleted, including:
+  - Knowledge bases and their contents
+  - Apps and their configurations
+  - Member associations
+  - Settings and customizations
+- If users have active subscriptions tied to the organization, the deletion might fail with a 409 Conflict status.
+- Only the organization owner can delete an organization.
+- Consider archiving or exporting important data before deletion.
+- After deletion, all members will lose access to the organization's resources. 
