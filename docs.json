@@ -1,11 +1,14 @@
 {
   "$schema": "https://mintlify.com/docs.json",
-  "theme": "mint",
+  "theme": "palm",
   "name": "KnowFlow",
   "colors": {
-    "primary": "#4285F4",
-    "light": "#4285F4",
-    "dark": "#1B3B6F"
+    "primary": "#4285f4",
+    "light": "#7FB5FF",
+    "dark": "#4285f4"
+  },
+  "background": {
+    "decoration": "gradient"
   },
   "favicon": "/favicon.svg",
   "navigation": {
@@ -140,9 +143,80 @@
   },
   "footer": {
     "socials": {
-      "twitter": "https://twitter.com/knowflow_ai",
+      "x": "https://twitter.com/knowflow_ai",
       "github": "https://github.com/knowflow",
-      "linkedin": "https://linkedin.com/company/knowflow-ai"
-    }
+      "linkedin": "https://linkedin.com/company/knowflow-ai",
+      "discord": "https://discord.gg/knowflow"
+    },
+    "links": [
+      {
+        "header": "Product",
+        "items": [
+          {
+            "label": "Features",
+            "href": "https://knowflow.in/#features"
+          },
+          {
+            "label": "Pricing",
+            "href": "https://knowflow.in/#pricing"
+          },
+          {
+            "label": "Security",
+            "href": "https://knowflow.in/security"
+          }
+        ]
+      },
+      {
+        "header": "Company",
+        "items": [
+          {
+            "label": "About",
+            "href": "https://knowflow.in/about"
+          },
+          {
+            "label": "Blog",
+            "href": "https://knowflow.in/blog"
+          },
+          {
+            "label": "Careers",
+            "href": "https://knowflow.in/careers"
+          }
+        ]
+      },
+      {
+        "header": "Resources",
+        "items": [
+          {
+            "label": "Documentation",
+            "href": "https://docs.knowflow.in"
+          },
+          {
+            "label": "API Reference",
+            "href": "https://docs.knowflow.in/api-reference/introduction"
+          },
+          {
+            "label": "Community",
+            "href": "https://discord.gg/knowflow"
+          }
+        ]
+      },
+      {
+        "header": "Legal",
+        "items": [
+          {
+            "label": "Privacy",
+            "href": "https://knowflow.in/privacy-policy"
+          },
+          {
+            "label": "Terms",
+            "href": "https://knowflow.in/terms-of-service"
+          },
+          {
+            "label": "Refund Policy",
+            "href": "https://knowflow.in/refund-policy"
+          }
+        ]
+      }
+    ]
   }
 }
