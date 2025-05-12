@@ -45,63 +45,6 @@
             ]
           }
         ]
-      },
-      {
-        "tab": "API Reference",
-        "groups": [
-          {
-            "group": "API Documentation",
-            "pages": [
-              "api-reference/introduction"
-            ]
-          },
-          {
-            "group": "Authentication",
-            "pages": [
-              "api-reference/auth/register",
-              "api-reference/auth/login",
-              "api-reference/auth/refresh"
-            ]
-          },
-          {
-            "group": "Organizations",
-            "pages": [
-              "api-reference/organizations/list",
-              "api-reference/organizations/get",
-              "api-reference/organizations/create",
-              "api-reference/organizations/update",
-              "api-reference/organizations/delete"
-            ]
-          },
-          {
-            "group": "Knowledge Bases",
-            "pages": [
-              "api-reference/knowledge-bases/list",
-              "api-reference/knowledge-bases/get",
-              "api-reference/knowledge-bases/create",
-              "api-reference/knowledge-bases/update",
-              "api-reference/knowledge-bases/delete"
-            ]
-          },
-          {
-            "group": "AI Assistants",
-            "pages": [
-              "api-reference/apps/list",
-              "api-reference/apps/get",
-              "api-reference/apps/create",
-              "api-reference/apps/update",
-              "api-reference/apps/delete"
-            ]
-          },
-          {
-            "group": "Chat",
-            "pages": [
-              "api-reference/chat/send-message",
-              "api-reference/chat/get-conversations",
-              "api-reference/chat/get-messages"
-            ]
-          }
-        ]
       }
     ],
     "global": {
