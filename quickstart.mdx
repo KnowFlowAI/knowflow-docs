@@ -1,6 +1,6 @@
 ---
-title: 'Quickstart'
-description: 'Get started with KnowFlow in minutes'
+title: "Quickstart"
+description: "Get started with KnowFlow in minutes"
 ---
 
 ## Setting up your KnowFlow account
@@ -9,56 +9,50 @@ Follow these steps to get started with KnowFlow and create your first AI assista
 
 <Steps>
   <Step title="Create an account">
-    Sign up for a KnowFlow account at [app.knowflow.in](https://app.knowflow.in). 
+    Sign up for a KnowFlow account at [app.knowflow.in](https://app.knowflow.in).
     You can sign up with your email.
   </Step>
-
   <Step title="Create a organization">
-    After logging in, you'll be prompted to create your first organization. 
-    
+    After logging in, you'll be prompted to create your first organization.
+
     - Enter a name for your organization
     - Add a brief description
     - Invite team members (optional)
-    
+
     Your organization will serve as the central hub for all your knowledge bases and AI assistants.
   </Step>
-
   <Step title="Create a knowledge base">
     Next, create your first knowledge base to store information:
-    
+
     1. Go to the **Knowledge Bases** section in the sidebar
     2. Click **Create Knowledge Base**
     3. Enter a name and description
     4. Click **Create**
   </Step>
-
   <Step title="Add knowledge sources">
     You can import information from multiple sources:
 
     <AccordionGroup>
-      <Accordion icon="file" title="Upload Documents">
+      <Accordion title="Upload Documents" icon="file" iconType="duotone">
         1. Select your knowledge base
         2. Click **Add Sources** → **Upload Document**
         3. Select and upload your files (PDF, DOCX, TXT, MD formats supported)
         4. The system will automatically process and index your documents
       </Accordion>
-
-      <Accordion icon="question" title="Custom QA Pairs">
+      <Accordion title="Custom QA Pairs" icon="comments-question-check" iconType="duotone">
         1. Select your knowledge base
         2. Click **Add Sources** → **Custom QA Pairs**
         3. Add custom Question & Answer pairs
         4. The system will automatically process and index your QA pairs
       </Accordion>
-
-      <Accordion icon="globe" title="Add Website URLs">
+      <Accordion title="Add Website URLs" icon="globe-pointer" iconType="duotone">
         1. Select your knowledge base
         2. Click **Add Sources** → **Website URL**
         3. Enter the website URL you want to index
         4. Set crawling options (depth, page limits, etc.)
         5. Click **Add**
       </Accordion>
-
-      <Accordion icon="github" title="Add GitHub Issues">
+      <Accordion title="Add GitHub Issues" icon="github" iconType="brands">
         1. Select your knowledge base
         2. Click **Add Sources** → **GitHub**
         3. Enter repository details (owner/repo format)
@@ -67,7 +61,6 @@ Follow these steps to get started with KnowFlow and create your first AI assista
       </Accordion>
     </AccordionGroup>
   </Step>
-
   <Step title="Create an AI assistant">
     Now that your knowledge base is ready, create an AI assistant:
 
@@ -79,26 +72,23 @@ Follow these steps to get started with KnowFlow and create your first AI assista
     6. Configure appearance and behavior settings
     7. Click **Create**
   </Step>
-
   <Step title="Deploy your assistant">
     Deploy your newly created assistant where your users need help:
 
     <AccordionGroup>
-      <Accordion icon="browser" title="Web Chat">
+      <Accordion title="Web Chat" icon="message" iconType="duotone">
         1. Go to your app in the Apps section
         2. Navigate to the **Embed** tab
         3. Copy the provided JavaScript snippet
         4. Paste it into your website's HTML before the closing `</body>` tag
       </Accordion>
-
-      <Accordion icon="discord" title="Discord Bot">
+      <Accordion title="Discord Bot" icon="discord" iconType="duotone">
         1. Go to your app in the Apps section
         2. Navigate to the **Discord** tab
         3. Follow the instructions to connect your Discord server
         4. Set channel permissions and bot behavior
       </Accordion>
-
-      <Accordion icon="slack" title="Slack Integration (Coming soon)">
+      <Accordion title="Slack Integration (Coming soon)" icon="slack" iconType="duotone">
         1. Go to your app in the Apps section
         2. Navigate to the **Slack** tab
         3. Click **Connect to Slack**
@@ -113,20 +103,17 @@ Follow these steps to get started with KnowFlow and create your first AI assista
 
 Now that you have your first AI assistant up and running, you can:
 
-<CardGroup>
-  <Card title="Customize Appearance" icon="palette" href="/essentials/settings">
+<CardGroup cols={2}>
+  <Card title="Customize Appearance" icon="palette" iconType="duotone" href="/essentials/settings">
     Customize your assistant's appearance to match your brand.
   </Card>
-
-  <Card title="Tune AI Behavior" icon="sliders" href="/essentials/settings">
+  <Card title="Tune AI Behavior" icon="sliders" iconType="duotone" href="/essentials/settings">
     Adjust AI model parameters and system prompts to improve responses.
   </Card>
-
-  <Card title="Monitor Performance" icon="chart-line" href="/essentials/analytics">
+  <Card title="Monitor Performance" icon="chart-line" iconType="duotone" href="/essentials/analytics">
     Track usage metrics, analytics, and identify areas for improvement.
   </Card>
-
-  <Card title="Expand Knowledge" icon="database" href="/essentials/knowledge-sources">
+  <Card title="Expand Knowledge" icon="database" iconType="duotone" href="/essentials/knowledge-sources">
     Add more knowledge sources to make your assistant even more helpful.
   </Card>
 </CardGroup>
