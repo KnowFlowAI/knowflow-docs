@@ -1,0 +1,67 @@
+---
+title: Frontend Components for Analytics
+description: Overview of major React components used in the Global Conversations analytics page.
+---
+
+# Frontend Components
+
+This section describes the major React components developed for the Global Conversations analytics feature.
+
+## `AnalyticsConversationsPage`
+
+**Location**: `apps/knowflow/frontend/src/pages/AnalyticsConversationsPage.tsx`
+
+This is the main page component that orchestrates the entire Global Conversations UI. It manages:
+- Fetching and mapping application/integration data.
+- Overall state management for filters (view mode, search text, date range, selected auto labels, selected app integrations).
+- Fetching conversation data based on active filters and pagination.
+- Passing data and handlers down to child components (`ConversationsListPane`, `ConversationDetailPane`).
+- Handling the "Mark as Reviewed" action callback to update list and UI state.
+
+**Key Props**: None (it's a page route component).
+
+## `ConversationsListPane`
+
+**Location**: `apps/knowflow/frontend/src/pages/AnalyticsConversationsPage.tsx` (Defined within the same file)
+
+This component is responsible for displaying the filter controls and the list of conversations.
+
+**Key Props**:
+
+| Prop                     | Type                                     | Description                                                                       |
+|--------------------------|------------------------------------------|-----------------------------------------------------------------------------------|
+| `onSelectConversation`   | `(id: string) => void`                   | Callback function invoked when a conversation is selected from the list.          |
+| `selectedConversationId` | `string \| null`                           | The ID of the currently selected conversation, for highlighting.                  |
+| `conversations`          | `AnalyticsConversation[]`                | Array of conversation objects to display.                                         |
+| `isLoading`              | `boolean`                                | Indicates if the conversation list is currently loading.                          |
+| `error`                  | `string \| null`                           | Error message if fetching conversations failed.                                   |
+| `currentPage`            | `number`                                 | Current page number for pagination.                                               |
+| `totalPages`             | `number`                                 | Total number of pages available.                                                  |
+| `fetchConversations`     | `(page: number) => void`                 | Function to call to fetch/refresh conversations (passes current filters from parent). |
+| `setCurrentPage`         | `(page: number) => void`                 | Function to call when pagination controls change the page.                        |
+
+## `ConversationDetailPane`
+
+**Location**: `apps/knowflow/frontend/src/pages/AnalyticsConversationsPage.tsx` (Defined within the same file)
+
+This component displays the messages of a selected conversation and the "Mark as Reviewed" button.
+
+**Key Props**:
+
+| Prop                          | Type                                     | Description                                                                    |
+|-------------------------------|------------------------------------------|--------------------------------------------------------------------------------|
+| `selectedConversationId`      | `string \| null`                           | The ID of the conversation whose messages are to be displayed.                 |
+| `selectedConversationDetails` | `AnalyticsConversation \| null`           | Details of the selected conversation (e.g., app name, start time).             |
+| `onConversationReviewed`      | `(sessionId: string) => void`            | Callback function invoked after a conversation is successfully marked as reviewed. |
+
+## `AnalyticsMessageDisplay`
+
+**Location**: `apps/knowflow/frontend/src/pages/AnalyticsConversationsPage.tsx` (Defined within the same file)
+
+Adapted from `HistoryMessageDisplay`, this component is responsible for rendering a single message within the `ConversationDetailPane`.
+
+**Key Props**:
+
+| Prop      | Type                   | Description                                           |
+|-----------|------------------------|-------------------------------------------------------|
+| `message` | `AnalyticsChatMessage` | The message object to display.                        |

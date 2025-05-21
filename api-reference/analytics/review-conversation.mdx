@@ -1,0 +1,35 @@
+---
+title: POST /conversations/{sessionId}/review
+description: Mark a specific analytics conversation session as reviewed.
+---
+
+# Mark Conversation as Reviewed
+
+Marks a specific conversation session as reviewed. This is used in the Global Conversations analytics page to track which conversations have been manually checked.
+
+**Method**: `POST`
+
+**Path**: `/api/v1/analytics/conversations/{sessionId}/review`
+
+## Path Parameters
+
+| Parameter   | Type   | Description                                     |
+|-------------|--------|-------------------------------------------------|
+| `sessionId` | string | The unique identifier of the conversation session. |
+
+## Request Body
+
+This endpoint does not require a request body.
+
+## Response Body
+
+- **On Success**: `200 OK` with a JSON body: `{"message": "Conversation marked as reviewed successfully."}`
+- **On Failure**: Standard error response (e.g., `404 Not Found` if session doesn't exist, `500 Internal Server Error` for other issues).
+
+## Example Request
+
+```bash
+curl -X POST \
+  /api/v1/analytics/conversations/session_xyz123abc/review \
+  -H 'Authorization: Bearer <YOUR_ACCESS_TOKEN>'
+``` 

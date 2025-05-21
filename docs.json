@@ -18,11 +18,7 @@
         "groups": [
           {
             "group": "Get Started",
-            "pages": [
-              "introduction",
-              "quickstart",
-              "development"
-            ]
+            "pages": ["introduction", "quickstart", "development"]
           },
           {
             "group": "Core Features",
@@ -42,6 +38,21 @@
               "essentials/images",
               "essentials/navigation",
               "essentials/reusable-snippets"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "API Reference",
+        "groups": [
+          {
+            "group": "Analytics API",
+            "pages": [
+              "api-reference/analytics/overview",
+              "api-reference/analytics/get-conversations",
+              "api-reference/analytics/get-conversation-messages",
+              "api-reference/analytics/review-conversation",
+              "api-reference/analytics/components"
             ]
           }
         ]

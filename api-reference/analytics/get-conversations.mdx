@@ -1,0 +1,79 @@
+---
+title: GET /conversations
+description: Retrieve a list of analytics conversations with filtering and pagination.
+---
+
+import { Callout } from 'nextra/components'
+import { Steps } from 'nextra/components'
+
+# List Conversations
+
+Retrieves a paginated list of conversations, allowing for various filtering options to narrow down results. This endpoint powers the main conversation list in the Global Conversations analytics page.
+
+**Method**: `GET`
+
+**Path**: `/api/v1/analytics/conversations`
+
+## Query Parameters
+
+| Parameter         | Type           | Optional | Default | Description                                                                                                |
+|-------------------|----------------|----------|---------|------------------------------------------------------------------------------------------------------------|
+| `page`            | number         | Yes      | `1`     | The page number for pagination.                                                                            |
+| `size`            | number         | Yes      | `15`    | The number of items per page.                                                                              |
+| `mode`            | string         | Yes      | `all`   | View mode. Can be `all` (all conversations) or `review` (unreviewed conversations matching review criteria). |
+| `searchText`      | string         | Yes      |         | Text to search within conversation messages.                                                               |
+| `startDate`       | string         | Yes      |         | Start date for filtering conversations (YYYY-MM-DD).                                                       |
+| `endDate`         | string         | Yes      |         | End date for filtering conversations (YYYY-MM-DD).                                                         |
+| `autoLabels[]`    | array[string]  | Yes      |         | Array of auto labels to filter by (e.g., `autoLabels[]=Uncertain&autoLabels[]=Troubleshooting`).            |
+| `integrationIds[]`| array[string]  | Yes      |         | Array of App/Integration IDs to filter by.                                                                 |
+
+## Response Body
+
+The response is a JSON object containing the list of conversations and pagination details.
+
+```json filename="FetchConversationsResponse"
+{
+  "items": [
+    {
+      "id": "string (Session ID)",
+      "app_id": "string (Originating App/Integration ID)",
+      "started_at": "string (ISO 8601 datetime)",
+      "last_message_at": "string (ISO 8601 datetime)",
+      "messages_count": "number",
+      "status": "string (e.g., 'active', 'closed')",
+      "auto_labels": ["string"],
+      "is_reviewed": "boolean"
+    }
+    // ... more conversation items
+  ],
+  "total_items": "number",
+  "total_pages": "number",
+  "page": "number",
+  "size": "number"
+}
+```
+
+### `AnalyticsConversation` Object Properties
+
+| Property          | Type           | Description                                                                 |
+|-------------------|----------------|-----------------------------------------------------------------------------|
+| `id`              | string         | Unique identifier for the conversation session.                             |
+| `app_id`          | string         | ID of the application/integration where the conversation originated.        |
+| `started_at`      | string         | ISO 8601 timestamp of when the conversation started.                        |
+| `last_message_at` | string         | ISO 8601 timestamp of the last message in the conversation.                 |
+| `messages_count`  | number         | Total number of messages in the conversation.                               |
+| `status`          | string         | Current status of the conversation (e.g., `active`, `closed`, `reviewed`).  |
+| `auto_labels`     | array[string]  | List of automatically assigned labels (e.g., `Uncertain`, `Troubleshooting`). |
+| `is_reviewed`     | boolean        | Indicates if the conversation has been marked as reviewed.                    |
+
+<Callout type="info">
+  The `app_name` field seen in the frontend is resolved client-side by mapping `app_id` to a known app name and is not part of this API response directly.
+</Callout>
+
+## Example Request
+
+```bash
+curl -X GET \
+  '/api/v1/analytics/conversations?page=1&size=10&mode=review&autoLabels[]=Uncertain' \
+  -H 'Authorization: Bearer <YOUR_ACCESS_TOKEN>'
+``` 
