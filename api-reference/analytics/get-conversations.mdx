@@ -25,7 +25,7 @@ Retrieves a paginated list of conversations, allowing for various filtering opti
 | `startDate`       | string         | Yes      |         | Start date for filtering conversations (YYYY-MM-DD).                                                       |
 | `endDate`         | string         | Yes      |         | End date for filtering conversations (YYYY-MM-DD).                                                         |
 | `autoLabels[]`    | array[string]  | Yes      |         | Array of auto labels to filter by (e.g., `autoLabels[]=Uncertain&autoLabels[]=Troubleshooting`).            |
-| `integrationIds[]`| array[string]  | Yes      |         | Array of App/Integration IDs to filter by.                                                                 |
+| `integration_ids[]`| array[string]  | Yes      |         | Array of Integration IDs to filter by.                                                                 |
 
 ## Response Body
 
@@ -36,7 +36,7 @@ The response is a JSON object containing the list of conversations and paginatio
   "items": [
     {
       "id": "string (Session ID)",
-      "app_id": "string (Originating App/Integration ID)",
+      "integration_id": "string (Originating Integration ID)",
       "started_at": "string (ISO 8601 datetime)",
       "last_message_at": "string (ISO 8601 datetime)",
       "messages_count": "number",
@@ -58,7 +58,7 @@ The response is a JSON object containing the list of conversations and paginatio
 | Property          | Type           | Description                                                                 |
 |-------------------|----------------|-----------------------------------------------------------------------------|
 | `id`              | string         | Unique identifier for the conversation session.                             |
-| `app_id`          | string         | ID of the application/integration where the conversation originated.        |
+| `integration_id`  | string         | ID of the integration where the conversation originated.        |
 | `started_at`      | string         | ISO 8601 timestamp of when the conversation started.                        |
 | `last_message_at` | string         | ISO 8601 timestamp of the last message in the conversation.                 |
 | `messages_count`  | number         | Total number of messages in the conversation.                               |
@@ -67,13 +67,13 @@ The response is a JSON object containing the list of conversations and paginatio
 | `is_reviewed`     | boolean        | Indicates if the conversation has been marked as reviewed.                    |
 
 <Callout type="info">
-  The `app_name` field seen in the frontend is resolved client-side by mapping `app_id` to a known app name and is not part of this API response directly.
+  The `integration_name` field seen in the frontend is resolved client-side by mapping `integration_id` to a known integration name and is not part of this API response directly.
 </Callout>
 
 ## Example Request
 
 ```bash
 curl -X GET \
-  '/api/v1/conversations?page=1&size=10&mode=review&autoLabels[]=Uncertain' \
+  '/api/v1/conversations?page=1&size=10&mode=review&autoLabels[]=Uncertain&integration_ids[]=<YOUR_INTEGRATION_ID>' \
   -H 'Authorization: Bearer <YOUR_ACCESS_TOKEN>'
 ``` 
