@@ -11,7 +11,7 @@ Retrieves all messages associated with a specific conversation session ID. This 
 
 **Method**: `GET`
 
-**Path**: `/api/v1/analytics/conversations/{sessionId}/messages`
+**Path**: `/api/v1/conversations/{sessionId}/messages`
 
 ## Path Parameters
 
@@ -72,6 +72,6 @@ The response is a JSON array of message objects.
 
 ```bash
 curl -X GET \
-  /api/v1/analytics/conversations/session_xyz123abc/messages \
+  /api/v1/conversations/session_xyz123abc/messages \
   -H 'Authorization: Bearer <YOUR_ACCESS_TOKEN>'
 ``` 

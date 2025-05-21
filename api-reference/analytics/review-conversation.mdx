@@ -9,7 +9,7 @@ Marks a specific conversation session as reviewed. This is used in the Global Co
 
 **Method**: `POST`
 
-**Path**: `/api/v1/analytics/conversations/{sessionId}/review`
+**Path**: `/api/v1/conversations/{sessionId}/review`
 
 ## Path Parameters
 
@@ -30,6 +30,6 @@ This endpoint does not require a request body.
 
 ```bash
 curl -X POST \
-  /api/v1/analytics/conversations/session_xyz123abc/review \
+  /api/v1/conversations/session_xyz123abc/review \
   -H 'Authorization: Bearer <YOUR_ACCESS_TOKEN>'
 ``` 

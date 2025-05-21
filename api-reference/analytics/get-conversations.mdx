@@ -12,7 +12,7 @@ Retrieves a paginated list of conversations, allowing for various filtering opti
 
 **Method**: `GET`
 
-**Path**: `/api/v1/analytics/conversations`
+**Path**: `/api/v1/conversations`
 
 ## Query Parameters
 
@@ -74,6 +74,6 @@ The response is a JSON object containing the list of conversations and paginatio
 
 ```bash
 curl -X GET \
-  '/api/v1/analytics/conversations?page=1&size=10&mode=review&autoLabels[]=Uncertain' \
+  '/api/v1/conversations?page=1&size=10&mode=review&autoLabels[]=Uncertain' \
   -H 'Authorization: Bearer <YOUR_ACCESS_TOKEN>'
 ``` 
