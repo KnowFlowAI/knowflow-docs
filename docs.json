@@ -11,6 +11,14 @@
     "decoration": "grid"
   },
   "favicon": "/favicon.svg",
+  "integrations": {
+    "posthog": {
+      "apiKey": "phc_GnUo8rmxscHR679CxoDha629KUCqcCCoSRBjybMWDBI"
+    }
+  },
+  "contextual": {
+    "options": ["copy", "view", "chatgpt", "claude"]
+  },
   "navigation": {
     "tabs": [
       {
