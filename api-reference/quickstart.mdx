@@ -1,0 +1,47 @@
+---
+title: 'API Quickstart'
+description: 'Get started with the KnowFlow API quickly'
+---
+
+# API Quickstart
+
+Get up and running with the KnowFlow API in just a few steps.
+
+## 1. Get Your API Token
+
+First, you'll need to generate an API token:
+
+1. Log in to your [KnowFlow Dashboard](https://app.knowflow.in)
+2. Navigate to **Settings** → **API Keys**
+3. Click **Generate New API Key**
+4. Copy and securely store your token
+
+## 2. Make Your First Request
+
+Test your connection with a simple request to list your organizations:
+
+```bash
+curl -X GET https://api.knowflow.in/v1/organizations \
+  -H "Authorization: Bearer YOUR_API_TOKEN"
+```
+
+## 3. Explore Analytics
+
+Get your conversation analytics:
+
+```bash
+curl -X GET https://api.knowflow.in/v1/analytics/conversations \
+  -H "Authorization: Bearer YOUR_API_TOKEN"
+```
+
+## 4. Next Steps
+
+- Explore the [Analytics API](./analytics/overview) for conversation insights
+- Learn about [Authentication](./introduction#authentication) best practices
+- Check out [Code Examples](./examples) for common use cases
+
+## Need Help?
+
+- Browse the complete [API Reference](./introduction)
+- Join our [Discord Community](https://discord.gg/knowflow)
+- Contact [Support](mailto:support@knowflow.in) 

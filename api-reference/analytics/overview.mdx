@@ -3,8 +3,6 @@ title: Analytics API Overview
 description: High-level overview of the Knowflow Analytics API for conversation data.
 ---
 
-import { Callout } from 'nextra/components'
-
 # Analytics API Overview
 
 The Knowflow Analytics API provides endpoints to access and manage conversation data collected across your deployments. This allows you to programmatically retrieve conversation lists, individual message details, and manage review statuses.
@@ -41,6 +39,6 @@ Detailed documentation for each endpoint is available:
 - **[GET /conversations/{sessionId}/messages](./get-conversation-messages)**: Retrieve messages for a specific conversation.
 - **[POST /conversations/{sessionId}/review](./review-conversation)**: Mark a conversation as reviewed.
 
-<Callout type="info">
+<Info>
   The API is designed to support the features described in the Global Conversations analytics section, including 'All Conversations' and 'Review Mode' functionalities.
-</Callout> 
+</Info> 

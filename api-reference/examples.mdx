@@ -1,0 +1,176 @@
+---
+title: 'API Examples'
+description: 'Sample code and examples for common KnowFlow API operations'
+---
+
+# API Examples
+
+Common code examples for integrating with the KnowFlow API.
+
+## Authentication Example
+
+```javascript
+const API_TOKEN = 'your_api_token_here';
+const BASE_URL = 'https://api.knowflow.in/v1';
+
+const headers = {
+  'Authorization': `Bearer ${API_TOKEN}`,
+  'Content-Type': 'application/json'
+};
+```
+
+## List Organizations
+
+```javascript
+async function getOrganizations() {
+  const response = await fetch(`${BASE_URL}/organizations`, {
+    headers
+  });
+  
+  if (response.ok) {
+    const data = await response.json();
+    console.log('Organizations:', data);
+    return data;
+  } else {
+    console.error('Error:', response.statusText);
+  }
+}
+```
+
+## Get Conversations
+
+```javascript
+async function getConversations(page = 1, size = 15) {
+  const params = new URLSearchParams({ page, size });
+  
+  const response = await fetch(`${BASE_URL}/analytics/conversations?${params}`, {
+    headers
+  });
+  
+  if (response.ok) {
+    const data = await response.json();
+    console.log('Conversations:', data);
+    return data;
+  } else {
+    console.error('Error:', response.statusText);
+  }
+}
+```
+
+## Get Conversation Messages
+
+```javascript
+async function getConversationMessages(sessionId) {
+  const response = await fetch(`${BASE_URL}/analytics/conversations/${sessionId}/messages`, {
+    headers
+  });
+  
+  if (response.ok) {
+    const data = await response.json();
+    console.log('Messages:', data);
+    return data;
+  } else {
+    console.error('Error:', response.statusText);
+  }
+}
+```
+
+## Mark Conversation as Reviewed
+
+```javascript
+async function reviewConversation(sessionId) {
+  const response = await fetch(`${BASE_URL}/analytics/conversations/${sessionId}/review`, {
+    method: 'POST',
+    headers
+  });
+  
+  if (response.ok) {
+    console.log('Conversation marked as reviewed');
+    return true;
+  } else {
+    console.error('Error:', response.statusText);
+    return false;
+  }
+}
+```
+
+## Python Examples
+
+```python
+import requests
+
+API_TOKEN = 'your_api_token_here'
+BASE_URL = 'https://api.knowflow.in/v1'
+
+headers = {
+    'Authorization': f'Bearer {API_TOKEN}',
+    'Content-Type': 'application/json'
+}
+
+def get_conversations(page=1, size=15):
+    params = {'page': page, 'size': size}
+    response = requests.get(f'{BASE_URL}/analytics/conversations', 
+                          headers=headers, params=params)
+    
+    if response.status_code == 200:
+        return response.json()
+    else:
+        print(f'Error: {response.status_code}')
+        return None
+```
+
+## Error Handling
+
+```javascript
+async function apiRequest(endpoint, options = {}) {
+  try {
+    const response = await fetch(`${BASE_URL}${endpoint}`, {
+      headers,
+      ...options
+    });
+    
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(`API Error: ${errorData.error?.message || response.statusText}`);
+    }
+    
+    return await response.json();
+  } catch (error) {
+    console.error('Request failed:', error.message);
+    throw error;
+  }
+}
+```
+
+## Rate Limiting Handling
+
+```javascript
+async function apiRequestWithRetry(endpoint, options = {}, maxRetries = 3) {
+  for (let attempt = 1; attempt <= maxRetries; attempt++) {
+    try {
+      const response = await fetch(`${BASE_URL}${endpoint}`, {
+        headers,
+        ...options
+      });
+      
+      if (response.status === 429) {
+        // Rate limited, wait and retry
+        const retryAfter = response.headers.get('Retry-After') || 1;
+        await new Promise(resolve => setTimeout(resolve, retryAfter * 1000));
+        continue;
+      }
+      
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+      }
+      
+      return await response.json();
+    } catch (error) {
+      if (attempt === maxRetries) throw error;
+      
+      // Exponential backoff
+      await new Promise(resolve => setTimeout(resolve, Math.pow(2, attempt) * 1000));
+    }
+  }
+}
+``` 

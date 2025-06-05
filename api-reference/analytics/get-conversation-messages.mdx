@@ -3,8 +3,6 @@ title: GET /conversations/{sessionId}/messages
 description: Retrieve all messages for a specific analytics conversation session.
 ---
 
-import { Callout } from 'nextra/components'
-
 # Get Conversation Messages
 
 Retrieves all messages associated with a specific conversation session ID. This endpoint is used to display the detailed message view in the Global Conversations analytics page.
@@ -64,9 +62,9 @@ The response is a JSON array of message objects.
 | `metadata.sources[key].title` | string \| undefined            | The title of the source document/page, if available.                                                       |
 | `metadata.confidence` | number \| undefined                 | Optional. A confidence score for the assistant's message.                                                  |
 
-<Callout type="info">
+<Info>
   The structure of the `metadata` object, particularly `sources`, is based on the existing message display logic and might evolve.
-</Callout>
+</Info>
 
 ## Example Request
 

@@ -3,9 +3,6 @@ title: GET /conversations
 description: Retrieve a list of analytics conversations with filtering and pagination.
 ---
 
-import { Callout } from 'nextra/components'
-import { Steps } from 'nextra/components'
-
 # List Conversations
 
 Retrieves a paginated list of conversations, allowing for various filtering options to narrow down results. This endpoint powers the main conversation list in the Global Conversations analytics page.
@@ -66,9 +63,9 @@ The response is a JSON object containing the list of conversations and paginatio
 | `auto_labels`     | array[string]  | List of automatically assigned labels (e.g., `Uncertain`, `Troubleshooting`). |
 | `is_reviewed`     | boolean        | Indicates if the conversation has been marked as reviewed.                    |
 
-<Callout type="info">
+<Info>
   The `integration_name` field seen in the frontend is resolved client-side by mapping `integration_id` to a known integration name and is not part of this API response directly.
-</Callout>
+</Info>
 
 ## Example Request
 
