@@ -98,6 +98,87 @@ Embed your AI assistant directly on your website:
   </Step>
 </Steps>
 
+### Widget Trigger Buttons
+
+Enhance your website UX by adding custom buttons that can open, close, or toggle your chat widget:
+
+<Steps>
+  <Step title="Enable Trigger Buttons">
+    When configuring your widget, ensure trigger buttons are enabled:
+    ```javascript
+    window.KnowFlowConfig = {
+      integrationId: "your-integration-id",
+      websiteId: "your-website-id",
+      enableTriggerButtons: true, // Default: true
+      // ... other config options
+    };
+    ```
+  </Step>
+  <Step title="Add Data Attributes">
+    Add the `data-knowflow-trigger` attribute to any HTML element:
+    ```html
+    <!-- Open the widget -->
+    <button data-knowflow-trigger="open">Get Help</button>
+
+    <!-- Close the widget -->
+    <button data-knowflow-trigger="close">Close Chat</button>
+
+    <!-- Toggle the widget (default action) -->
+    <button data-knowflow-trigger="toggle">Chat Support</button>
+    <button data-knowflow-trigger>Chat Support</button>
+    ```
+  </Step>
+  <Step title="Style Your Buttons">
+    The trigger works on any HTML element, allowing for creative implementations:
+    ```html
+    <!-- Help card -->
+    <div class="help-card" data-knowflow-trigger="open">
+      <h3>💬 Need Help?</h3>
+      <p>Click here to chat with our AI assistant</p>
+    </div>
+
+    <!-- Help icon -->
+    <i class="fa fa-question-circle" 
+       data-knowflow-trigger="open" 
+       title="Get Help"></i>
+
+    <!-- Image trigger -->
+    <img src="help-icon.png" 
+         alt="Help" 
+         data-knowflow-trigger="open" />
+    ```
+  </Step>
+  <Step title="Programmatic Control">
+    Control the widget via JavaScript for advanced interactions:
+    ```javascript
+    // Wait for widget to initialize
+    setTimeout(() => {
+      // Open the widget
+      window.KnowFlowWidget.open();
+      
+      // Close the widget
+      window.KnowFlowWidget.close();
+      
+      // Toggle the widget
+      window.KnowFlowWidget.toggle();
+    }, 1000);
+    ```
+  </Step>
+</Steps>
+
+**Supported Actions:**
+- `open` - Opens the widget dialog
+- `close` - Closes the widget dialog  
+- `toggle` - Toggles the widget (default if no value specified)
+
+**Dynamic Elements:** The widget automatically detects trigger buttons added after page load, making it perfect for single-page applications.
+
+**Example Use Cases:**
+- FAQ pages with "Still need help?" links
+- Support cards in your help center
+- Custom help buttons in your app's header
+- Product page assistance links
+
 ### Discord Integration
 
 Connect your AI assistant to Discord:
@@ -272,6 +353,14 @@ Identify areas where your assistant needs improvement:
     - Check for JavaScript errors in your browser's console
     - Ensure your website doesn't have Content Security Policies blocking the script
     - Try clearing your browser cache
+  </Accordion>
+  
+  <Accordion title="Trigger Buttons Not Working">
+    - Check that `enableTriggerButtons` is not set to `false` in your configuration
+    - Ensure the widget has finished loading before testing trigger buttons
+    - Verify the `data-knowflow-trigger` attribute is spelled correctly
+    - Check browser console for JavaScript errors
+    - Confirm that `window.KnowFlowWidget` exists for programmatic control
   </Accordion>
   
   <Accordion title="Slow Response Times">
