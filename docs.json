@@ -37,30 +37,34 @@
             ]
           },
           {
-            "group": "Integrations",
+            "group": "Getting Started with Integrations",
             "pages": [
               "integrations/overview",
-              "integrations/creating-integrations",
-              "integrations/web-chat",
-              "integrations/widget-triggers",
-              "integrations/discord",
-              "integrations/slack",
-              "integrations/api",
-              "integrations/customization",
-              "integrations/analytics",
-              "integrations/best-practices",
-              "integrations/troubleshooting"
+              "integrations/creating-integrations"
             ]
           },
           {
-            "group": "Advanced",
+            "group": "Deployment Platforms",
             "pages": [
-              "essentials/settings",
-              "essentials/markdown",
-              "essentials/code",
-              "essentials/images",
-              "essentials/navigation",
-              "essentials/reusable-snippets"
+              "integrations/web-chat",
+              "integrations/discord",
+              "integrations/slack",
+              "integrations/api"
+            ]
+          },
+          {
+            "group": "Customization & Configuration",
+            "pages": [
+              "integrations/widget-triggers",
+              "integrations/customization"
+            ]
+          },
+          {
+            "group": "Monitoring & Optimization",
+            "pages": [
+              "integrations/analytics",
+              "integrations/best-practices",
+              "integrations/troubleshooting"
             ]
           }
         ]
