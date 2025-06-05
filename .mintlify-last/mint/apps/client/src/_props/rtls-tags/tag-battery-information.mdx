@@ -1,0 +1,188 @@
+---
+title: "Tag Battery Management"
+icon: "battery-full"
+description: "Complete guide to Locus RTLS Tag battery management, including replacement procedures and optimization strategies"
+keywords: "tag battery, battery life, power management, battery replacement, power optimization, RTLS maintenance"
+---
+
+# Tag Battery Management
+
+## Overview
+
+Proper battery management is crucial for maintaining reliable RTLS tag operation. This guide covers battery specifications, replacement procedures, and optimization strategies.
+
+## Battery Specifications
+
+### Supported Battery Types
+
+| Tag Series   | Battery Type         | Capacity | Voltage | Quantity |
+| ------------ | -------------------- | -------- | ------- | -------- |
+| LC01         | CR2032               | 225mAh   | 3.0V    | 1x       |
+| LC03         | CR2450               | 620mAh   | 3.0V    | 2x       |
+| Vehicle Tags | External             | N/A      | 12-24V  | N/A      |
+| Special      | Application specific | Varies   | Varies  | Varies   |
+
+### Expected Battery Life
+
+```mermaid
+graph TD
+    classDef primary fill:#1976D2,stroke:#0D47A1,stroke-width:2px,color:white
+    classDef factor fill:#78909C,stroke:#455A64,stroke-width:2px,color:white
+    classDef result fill:#43A047,stroke:#2E7D32,stroke-width:2px,color:white
+
+    A[Battery Life<br>Estimation] --> B[Update Rate<br>Frequency]
+    A --> C[Environmental<br>Conditions]
+    A --> D[Feature<br>Usage]
+    A --> E[Sleep Mode<br>Settings]
+    
+    B --> F[Expected<br>Battery Duration]
+    C --> F
+    D --> F
+    E --> F
+
+    class A primary
+    class B,C,D,E factor
+    class F result
+
+    style A fill:#1976D2,stroke:#0D47A1,stroke-width:2px,color:white
+    style B fill:#78909C,stroke:#455A64,stroke-width:2px,color:white
+    style C fill:#78909C,stroke:#455A64,stroke-width:2px,color:white
+    style D fill:#78909C,stroke:#455A64,stroke-width:2px,color:white
+    style E fill:#78909C,stroke:#455A64,stroke-width:2px,color:white
+    style F fill:#43A047,stroke:#2E7D32,stroke-width:2px,color:white
+```
+
+### Life Estimates
+
+| Configuration  | Update Rate | Features   | Life Expectancy |
+| -------------- | ----------- | ---------- | --------------- |
+| High Precision | 10Hz        | All active | 3-6 months      |
+| Standard       | 1Hz         | Basic      | 1-2 years       |
+| Power Save     | 0.2Hz       | Minimal    | 3-5 years       |
+| Motion Based   | Variable    | Selective  | 1-3 years       |
+
+## Battery Replacement
+
+### Replacement Procedure
+
+1. **Preparation**
+   * Clean workspace
+   * Proper tools
+   * New battery
+   * ESD protection
+
+2. **Tag Access**
+   * Power down tag
+   * Open battery compartment
+   * Note orientation
+   * Remove old battery
+
+3. **Installation**
+   * Clean contacts
+   * Insert new battery
+   * Verify polarity
+   * Close compartment
+
+4. **Verification**
+   * Power up check
+   * LED indication
+   * System detection
+   * Position verification
+
+### Safety Guidelines
+
+* Use approved batteries
+* Maintain polarity
+* Avoid metal tools
+* Clean environment
+* Proper disposal
+
+## Power Optimization
+
+### Configuration Strategies
+
+| Strategy           | Impact            | Trade-off          |
+| ------------------ | ----------------- | ------------------ |
+| Reduce update rate | Major positive    | Lower resolution   |
+| Enable sleep modes | Major positive    | Response delay     |
+| Motion activation  | Moderate positive | Setup complexity   |
+| Sensor scheduling  | Minor positive    | Feature limitation |
+
+### Environmental Factors
+
+* Temperature impact
+* Signal strength
+* Motion frequency
+* Update demands
+* Feature usage
+
+## Monitoring Tools
+
+### Battery Status
+
+* Real-time monitoring
+* Historical trends
+* Alert thresholds
+* Replacement planning
+* Usage analytics
+
+### System Integration
+
+* RTLS Hub dashboard
+* Email notifications
+* API integration
+* Maintenance scheduling
+* Report generation
+
+## Maintenance Planning
+
+### Preventive Maintenance
+
+1. Regular inspections
+2. Scheduled replacements
+3. Performance monitoring
+4. Environmental checks
+5. System optimization
+
+### Best Practices
+
+* Batch replacements
+* Rotation strategy
+* Inventory management
+* Testing protocol
+* Documentation
+
+## Troubleshooting
+
+### Common Issues
+
+| Issue        | Possible Cause   | Solution              |
+| ------------ | ---------------- | --------------------- |
+| Short life   | High update rate | Adjust configuration  |
+| No power     | Poor contact     | Clean/adjust contacts |
+| Intermittent | Low battery      | Replace battery       |
+| System error | Configuration    | Reset/reconfigure     |
+
+### Diagnostic Steps
+
+1. Check battery voltage
+2. Verify configuration
+3. Test in known state
+4. Monitor performance
+5. Document findings
+
+## Related Documentation
+
+* [Smart Sleep Modes](./smartsleepmodes)
+* [Default Configurations](./defaultconfigurations)
+* [Tag Peripherals](./tagperipherals)
+* [LC01 Series](./tagtypes/lc01series)
+* [LC03 Series](./tagtypes/lc03series)
+
+<Callout type="warning">
+  Always use approved battery types and follow proper handling procedures. Incorrect battery replacement can damage tags or create safety hazards.
+</Callout>
+
+<Callout type="info">
+  For specialized tag variants or custom power configurations, consult the specific product documentation or contact Locus support.
+</Callout>

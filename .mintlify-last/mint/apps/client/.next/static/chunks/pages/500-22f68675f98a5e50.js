@@ -1,0 +1,20 @@
+!function(){try{var e="undefined"!=typeof window?window:"undefined"!=typeof global?global:"undefined"!=typeof self?self:{},r=Error().stack;r&&(e._sentryDebugIds=e._sentryDebugIds||{},e._sentryDebugIds[r]="4ecd2967-15a8-442f-9996-489b54236394",e._sentryDebugIdIdentifier="sentry-dbid-4ecd2967-15a8-442f-9996-489b54236394")}catch(e){}}(),(self.webpackChunk_N_E=self.webpackChunk_N_E||[]).push([[8573],{53079:function(e,r,t){(window.__NEXT_P=window.__NEXT_P||[]).push(["/500",function(){return t(63690)}])},80360:function(e,r,t){"use strict";t.d(r,{f:function(){return m}});var n=t(52322),o=t(39097),a=t.n(o),d=t(63326),l=t(4787),i=t(25827),c=t(93842),s=t(74857),u=t(52688);function m({statusCode:e,title:r,description:t,docsConfig:o}){var a,m,g,h;let p={primary:(null==o?void 0:o.colors.primary)??"#117866",primaryLight:(null==o?void 0:o.colors.light)??"#4ADE80",primaryDark:(null==o?void 0:o.colors.dark)??"#166534",backgroundColorDark:(null==o?void 0:null===(m=o.background)||void 0===m?void 0:null===(a=m.color)||void 0===a?void 0:a.dark)??"#0f1117",backgroundColorLight:(null==o?void 0:null===(h=o.background)||void 0===h?void 0:null===(g=h.color)||void 0===g?void 0:g.light)??"#FFFFFF"},b=`
+    :root {
+      --primary: ${(0,i.co)(p.primary)};
+      --primary-light: ${(0,i.co)(p.primaryLight)};
+      --primary-dark: ${(0,i.co)(p.primaryDark)};
+      --background-light: ${(0,i.co)(p.backgroundColorLight)};
+      --background-dark: ${(0,i.Ve)(p.primaryLight,p.backgroundColorDark)};
+    }
+  `;return(0,n.jsxs)(d.Pn.Provider,{value:{docsConfig:o,docsNavWithMetadata:void 0},children:[(0,n.jsx)(c.v,{}),(0,n.jsx)(l.Z,{}),(0,n.jsx)(u.A,{}),(0,n.jsx)(s.$,{}),(0,n.jsx)("style",{children:b}),(0,n.jsx)("main",{className:"h-screen bg-background-light dark:bg-background-dark",children:(0,n.jsx)("article",{className:"bg-custom bg-fixed bg-center bg-cover relative flex flex-col items-center justify-center h-full",children:(0,n.jsxs)("div",{className:"w-full max-w-xl px-10",children:[(0,n.jsxs)("span",{className:"inline-flex mb-6 rounded-full px-3 py-1 text-sm font-semibold mr-4 text-white p-1 bg-primary",children:["Error ",e]}),(0,n.jsx)("h1",{className:"font-semibold mb-3 text-3xl",children:r??"Page not found!"}),(0,n.jsx)("p",{className:"text-lg text-gray-600 dark:text-gray-400 mb-6",children:t??(()=>{switch(e){case 404:return(0,n.jsx)(n.Fragment,{children:"We're sorry, we couldn't find the page you were looking for."});case 500:return(0,n.jsxs)(n.Fragment,{children:["An unexpected error occurred. Please ",(0,n.jsx)(f,{})," to get help."]});default:return"An unexpected error occurred. Please contact support."}})()})]})})})]})}function f(){return(0,n.jsx)(a(),{href:"mailto:support@mintlify.com",className:"font-medium text-gray-700 dark:text-gray-100 border-b hover:border-b-[2px] border-primary-dark dark:border-primary-light",children:"contact support"})}},63690:function(e,r,t){"use strict";t.r(r),t.d(r,{default:function(){return a}});var n=t(52322),o=t(80360);function a(){return(0,n.jsx)(o.f,{statusCode:500})}},74857:function(e,r,t){"use strict";t.d(r,{$:function(){return i}});var n=t(52322),o=t(45847),a=t.n(o),d=t(2784),l=t(63326);let i=()=>{var e;let{docsConfig:r}=(0,d.useContext)(l.Pn),t=null==r?void 0:null===(e=r.appearance)||void 0===e?void 0:e.default;return(0,n.jsx)(a(),{id:"mode-toggle",strategy:"beforeInteractive",dangerouslySetInnerHTML:{__html:`
+      try {
+        if (localStorage.isDarkMode === 'true') {
+          document.documentElement.classList.add('dark');
+        } else if (localStorage.isDarkMode === 'false') {
+          document.documentElement.classList.remove('dark');
+        } else if ((${(null==t).toString()} && !('isDarkMode' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches) || ${("dark"===t).toString()}) {
+          document.documentElement.classList.add('dark');
+        } else {
+          document.documentElement.classList.remove('dark');
+        }
+      } catch (_) {}`}})}}},function(e){e.O(0,[9774,2182,8934,1196,9099,2888,179],function(){return e(e.s=53079)}),_N_E=e.O()}]);

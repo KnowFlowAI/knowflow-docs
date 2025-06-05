@@ -1,0 +1,241 @@
+---
+title: "Line of Sight (LOS)"
+icon: "eye"
+description: "Comprehensive guide to Line of Sight parameters, measurement, and optimization in Locus RTLS systems"
+keywords: "LOS, line of sight, NLOS, RF parameters, signal path, UWB propagation, RTLS performance"
+---
+
+# Line of Sight (LOS)
+
+## Overview
+
+Line of Sight (LOS) parameters are fundamental metrics in Locus RTLS that characterize signal propagation paths between system components. These parameters are crucial for determining measurement quality, optimizing system performance, and ensuring reliable positioning.
+
+## Signal Propagation
+
+### Path Types
+
+```mermaid
+graph TD
+    classDef los fill:#4CAF50,stroke:#2E7D32,stroke-width:2px,color:white
+    classDef nlos fill:#F44336,stroke:#D32F2F,stroke-width:2px,color:white
+    classDef device fill:#1976D2,stroke:#0D47A1,stroke-width:2px,color:white
+
+    A[Transmitter] --> B[Direct Path]
+    A --> C[Reflected Path]
+    A --> D[Diffracted Path]
+    
+    B --> E[Receiver]
+    C --> E
+    D --> E
+
+    class A,E device
+    class B los
+    class C,D nlos
+```
+
+### Signal Characteristics
+
+| Path Type  | Delay    | Power      | Reliability |
+| ---------- | -------- | ---------- | ----------- |
+| Direct     | Minimal  | Strongest  | Highest     |
+| Reflected  | Variable | Attenuated | Medium      |
+| Diffracted | Extended | Weak       | Low         |
+| Scattered  | Random   | Very weak  | Unreliable  |
+
+## LOS Parameters
+
+### Channel Impulse Response
+
+```mermaid
+graph LR
+    classDef signal fill:#2196F3,stroke:#1976D2,stroke-width:2px,color:white
+    classDef process fill:#78909C,stroke:#455A64,stroke-width:2px,color:white
+    classDef result fill:#4CAF50,stroke:#2E7D32,stroke-width:2px,color:white
+
+    A[UWB Signal] --> B[Channel Response]
+    B --> C[First Path]
+    B --> D[Multipath]
+    B --> E[Noise Floor]
+    
+    C --> F[Path Analysis]
+    D --> F
+    E --> F
+
+    class A signal
+    class B,C,D,E process
+    class F result
+```
+
+### Quality Metrics
+
+| Parameter        | LOS                  | NLOS                  | Impact   |
+| ---------------- | -------------------- | --------------------- | -------- |
+| First Path Power | Greater than -85 dBm | Less than -85 dBm     | Critical |
+| Path Loss        | Less than -20 dB/m   | Greater than -20 dB/m | High     |
+| Delay Spread     | Less than 20 ns      | Greater than 20 ns    | Medium   |
+| SNR              | Greater than 10 dB   | Less than 10 dB       | High     |
+
+## LOS Probability
+
+### Classification Model
+
+```mermaid
+mindmap
+    root((LOS<br>Probability))
+        Signal Metrics
+            First path power
+            Rise time
+            Path loss
+        Channel Parameters
+            Delay spread
+            Coherence time
+            Bandwidth
+        Environmental Factors
+            Obstacles
+            Reflectors
+            Movement
+```
+
+### Probability Ranges
+
+| Range   | Classification | Reliability | Usage         |
+| ------- | -------------- | ----------- | ------------- |
+| 90-100% | Clear LOS      | Very High   | Primary       |
+| 70-90%  | Partial LOS    | High        | Secondary     |
+| 40-70%  | Mixed          | Medium      | Supplementary |
+| 10-40%  | NLOS           | Low         | Conditional   |
+| 0-10%   | Deep NLOS      | Very Low    | Excluded      |
+
+## System Implementation
+
+### Measurement Process
+
+```mermaid
+sequenceDiagram
+    participant T as Tag
+    participant A as Anchor
+    participant E as Engine
+    
+    Note over T,A: Signal Transmission
+    T->>A: UWB Pulse
+    A->>E: Channel Data
+    
+    Note over E: Analysis
+    E->>E: Path Detection
+    E->>E: Quality Assessment
+    
+    Note over E: Classification
+    E->>E: LOS Probability
+```
+
+### Performance Optimization
+
+1. **Signal Analysis**
+   * Path detection
+   * Power measurement
+   * Timing analysis
+   * Quality metrics
+
+2. **Path Classification**
+   * LOS probability
+   * Path reliability
+   * Error estimation
+   * Confidence level
+
+3. **System Adaptation**
+   * Weight assignment
+   * Path selection
+   * Algorithm tuning
+   * Performance tracking
+
+## Deployment Considerations
+
+### Environmental Analysis
+
+```mermaid
+graph TD
+    classDef factor fill:#FF9800,stroke:#F57C00,stroke-width:2px,color:white
+    classDef impact fill:#78909C,stroke:#455A64,stroke-width:2px,color:white
+    classDef action fill:#4CAF50,stroke:#2E7D32,stroke-width:2px,color:white
+
+    A[Environment] --> B[Static Obstacles]
+    A --> C[Dynamic Objects]
+    A --> D[RF Conditions]
+    
+    B --> E[Placement Strategy]
+    C --> F[Dynamic Adaptation]
+    D --> G[Channel Selection]
+
+    class A factor
+    class B,C,D impact
+    class E,F,G action
+```
+
+### Optimization Strategies
+
+| Factor       | Strategy          | Benefit         | Implementation |
+| ------------ | ----------------- | --------------- | -------------- |
+| Coverage     | Anchor density    | Better LOS      | Installation   |
+| Obstacles    | Height adjustment | Path clearance  | Mounting       |
+| Movement     | Dynamic tracking  | Path adaptation | Software       |
+| Interference | Channel selection | Signal quality  | Configuration  |
+
+## System Integration
+
+### Monitoring Tools
+
+1. **Real-time Analysis**
+   * Path quality
+   * LOS probability
+   * Signal metrics
+   * System health
+
+2. **Historical Tracking**
+   * Performance trends
+   * Quality changes
+   * Path stability
+   * System adaptation
+
+3. **Optimization Tools**
+   * Coverage maps
+   * Quality analysis
+   * Path visualization
+   * Performance reports
+
+## Best Practices
+
+### Implementation Guidelines
+
+1. **Design Phase**
+   * Site survey
+   * Coverage planning
+   * Anchor placement
+   * Path analysis
+
+2. **Installation**
+   * Height optimization
+   * Orientation setup
+   * Path validation
+   * Performance testing
+
+3. **Maintenance**
+   * Regular monitoring
+   * Path verification
+   * System tuning
+   * Performance optimization
+
+## Related Documentation
+
+* [RSSI](./rssi)
+* [First Path](./firstpath)
+* [UWB Technology](../uwbtechnology)
+* [System Architecture](../rtlsystemarchitecture)
+
+<Callout type="warning">
+  LOS parameters significantly impact positioning accuracy. Regular monitoring and optimization of LOS conditions is essential for optimal system performance.
+</Callout>
+
+<Callout type="info">
+  Contact Locus support for detailed LOS analysis tools and optimization recommendations for your specific deployment environment.
+</Callout>

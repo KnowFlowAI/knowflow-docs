@@ -1,0 +1,372 @@
+---
+title: 'Integrations'
+description: 'Create and manage intelligent AI integrations powered by your knowledge bases'
+---
+
+Integrations in KnowFlow are the interface between your knowledge bases and your users. They use the information you've stored to provide helpful, accurate responses across various platforms.
+
+## Understanding Integrations
+
+Integrations in KnowFlow are customizable chatbots that leverage your knowledge bases to answer questions and provide assistance. You can deploy these integrations across multiple platforms to meet your users where they are.
+
+### Key Concepts
+
+<CardGroup cols={2}>
+  <Card title="Integration" icon="robot">
+    The intelligent interface that interacts with users, powered by your knowledge
+  </Card>
+  <Card title="Knowledge Connection" icon="link">
+    The link between your integration and one or more knowledge bases
+  </Card>
+  <Card title="Deployment" icon="rocket">
+    How your integration is made available to users (website widget, API, etc.)
+  </Card>
+  <Card title="Prompt Engineering" icon="wand-magic-sparkles">
+    Customizing how your integration responds using system prompts
+  </Card>
+</CardGroup>
+
+## Creating an Integration
+
+<Steps>
+  <Step title="Navigate to Integrations">
+    From your organization dashboard, click on **Integrations** in the left sidebar.
+  </Step>
+  <Step title="Create New Integration">
+    Click the **Create Integration** button in the upper right corner.
+  </Step>
+  <Step title="Select Type">
+    Choose the type of integration you want to create:
+    - **Web Chat**: Embeddable chat widget for your website
+    - **API Endpoint**: Direct API access for custom integrations
+    - **Discord Bot**: Integration with Discord servers
+    - **Slack Bot**: Integration with Slack organizations
+    - **Microsoft Teams**: Integration with Microsoft Teams
+  </Step>
+  <Step title="Basic Configuration">
+    Enter the following information:
+    - **Name**: A descriptive name for your integration
+    - **Description**: (Optional) A brief description of its purpose
+    - **Icon/Avatar**: Upload a custom icon or choose from available options
+  </Step>
+  <Step title="Connect Knowledge Bases">
+    Select one or more knowledge bases to power your integration:
+    1. Click **Add Knowledge Base**
+    2. Select from your available knowledge bases
+    3. Set priority levels if using multiple knowledge bases
+  </Step>
+  <Step title="Configure Settings">
+    Adjust various settings according to your needs:
+    - **AI Model**: Select the underlying AI model (e.g., GPT-4, Claude, etc.)
+    - **Language**: Set the primary language for responses
+    - **Message History**: Configure how many previous messages to maintain as context
+    - **Maximum Response Length**: Set character limits for responses
+  </Step>
+  <Step title="Save">
+    Click **Create** to finish setting up your integration.
+  </Step>
+</Steps>
+
+## Deployment Options
+
+### Web Chat
+
+Embed your AI integration directly on your website:
+
+<Steps>
+  <Step title="Configure Widget">
+    Customize the appearance of your widget:
+    - **Theme**: Light, dark, or custom colors
+    - **Position**: Bottom-right, bottom-left, etc.
+    - **Initial State**: Expanded or collapsed
+    - **Welcome Message**: Customize the initial greeting
+    - **Widget Icon**: Upload a custom icon
+  </Step>
+  <Step title="Get Embed Code">
+    Navigate to the **Embed** tab and copy the provided JavaScript snippet:
+    ```html
+    <script src="https://embed.knowflow.in/js/widget.js" 
+            data-app-id="YOUR_APP_ID" defer>
+    </script>
+    ```
+  </Step>
+  <Step title="Add to Website">
+    Paste the JavaScript snippet into your website's HTML, just before the closing `</body>` tag.
+  </Step>
+  <Step title="Test Implementation">
+    Visit your website to verify the widget appears and functions correctly.
+  </Step>
+</Steps>
+
+### Widget Trigger Buttons
+
+Enhance your website UX by adding custom buttons that can open, close, or toggle your chat widget:
+
+<Steps>
+  <Step title="Enable Trigger Buttons">
+    When configuring your widget, ensure trigger buttons are enabled:
+    ```javascript
+    window.KnowFlowConfig = {
+      integrationId: "your-integration-id",
+      websiteId: "your-website-id",
+      enableTriggerButtons: true, // Default: true
+      // ... other config options
+    };
+    ```
+  </Step>
+  <Step title="Add Data Attributes">
+    Add the `data-knowflow-trigger` attribute to any HTML element:
+    ```html
+    <!-- Open the widget -->
+    <button data-knowflow-trigger="open">Get Help</button>
+
+    <!-- Close the widget -->
+    <button data-knowflow-trigger="close">Close Chat</button>
+
+    <!-- Toggle the widget (default action) -->
+    <button data-knowflow-trigger="toggle">Chat Support</button>
+    <button data-knowflow-trigger>Chat Support</button>
+    ```
+  </Step>
+  <Step title="Style Your Buttons">
+    The trigger works on any HTML element, allowing for creative implementations:
+    ```html
+    <!-- Help card -->
+    <div class="help-card" data-knowflow-trigger="open">
+      <h3>💬 Need Help?</h3>
+      <p>Click here to chat with our AI assistant</p>
+    </div>
+
+    <!-- Help icon -->
+    <i class="fa fa-question-circle" 
+       data-knowflow-trigger="open" 
+       title="Get Help"></i>
+
+    <!-- Image trigger -->
+    <img src="help-icon.png" 
+         alt="Help" 
+         data-knowflow-trigger="open" />
+    ```
+  </Step>
+  <Step title="Programmatic Control">
+    Control the widget via JavaScript for advanced interactions:
+    ```javascript
+    // Wait for widget to initialize
+    setTimeout(() => {
+      // Open the widget
+      window.KnowFlowWidget.open();
+      
+      // Close the widget
+      window.KnowFlowWidget.close();
+      
+      // Toggle the widget
+      window.KnowFlowWidget.toggle();
+    }, 1000);
+    ```
+  </Step>
+</Steps>
+
+**Supported Actions:**
+- `open` - Opens the widget dialog
+- `close` - Closes the widget dialog  
+- `toggle` - Toggles the widget (default if no value specified)
+
+**Dynamic Elements:** The widget automatically detects trigger buttons added after page load, making it perfect for single-page applications.
+
+**Example Use Cases:**
+- FAQ pages with "Still need help?" links
+- Support cards in your help center
+- Custom help buttons in your app's header
+- Product page assistance links
+
+### Discord Integration
+
+Connect your AI integration to Discord:
+
+<Steps>
+  <Step title="Configure Bot">
+    In the Discord tab of your app:
+    - Set bot username and description
+    - Upload a custom avatar
+    - Configure command prefixes (defaults to `/ask`)
+  </Step>
+  <Step title="Connect to Discord">
+    1. Click **Connect to Discord**
+    2. Log in to Discord (if not already)
+    3. Select the server to add the bot to
+    4. Approve the permissions requested
+  </Step>
+  <Step title="Set Channel Permissions">
+    Configure which channels the bot can access and respond in.
+  </Step>
+  <Step title="Test Bot">
+    In your Discord server, use the configured command (e.g., `/ask How do I reset my password?`) to test the bot.
+  </Step>
+</Steps>
+
+### Slack Integration
+
+Add your AI integration to Slack:
+
+<Steps>
+  <Step title="Configure Bot">
+    In the Slack tab of your app:
+    - Set bot name and description
+    - Upload a custom avatar
+    - Configure command trigger (defaults to `/knowflow`)
+  </Step>
+  <Step title="Connect to Slack">
+    1. Click **Connect to Slack**
+    2. Log in to Slack (if not already)
+    3. Select the organization to add the bot to
+    4. Approve the permissions requested
+  </Step>
+  <Step title="Configure Channels">
+    Choose which channels the bot should be active in.
+  </Step>
+  <Step title="Test Bot">
+    In your Slack organization, use the configured command (e.g., `/knowflow How do I reset my password?`) to test the bot.
+  </Step>
+</Steps>
+
+### API Access
+
+Use your AI integration programmatically via API:
+
+<Steps>
+  <Step title="Generate API Key">
+    In the API tab of your app, click **Generate API Key**.
+  </Step>
+  <Step title="Configure Access">
+    Set rate limits, IP restrictions, and other security settings.
+  </Step>
+  <Step title="Get Documentation">
+    Review the API documentation to understand available endpoints and parameters.
+  </Step>
+  <Step title="Implement">
+    Use the provided API key and endpoints in your application.
+    
+    **Example Request:**
+    ```bash
+    curl -X POST https://api.knowflow.in/v1/apps/YOUR_APP_ID/chat \
+      -H "Authorization: Bearer YOUR_API_KEY" \
+      -H "Content-Type: application/json" \
+      -d '{"message": "How do I reset my password?", "conversation_id": "optional-convo-id"}'
+    ```
+  </Step>
+</Steps>
+
+## Customizing Integration Behavior
+
+### Prompt Engineering
+
+Fine-tune how your integration responds:
+
+1. Go to the **Prompt** tab in your integration settings
+2. Customize the system prompt to guide your integration's behavior
+3. Use placeholders like `{{knowledge}}` where retrieved information should be inserted
+4. Save your changes
+
+Example system prompt:
+```
+You are a helpful support integration for {{company_name}}. 
+Use the following information to answer the user's question:
+{{knowledge}}
+
+If you don't know the answer based on the given information, say so politely 
+and offer to connect the user with a human agent.
+```
+
+### Response Templates
+
+Create templated responses for common queries:
+
+1. Go to the **Templates** tab in your integration settings
+2. Click **Add Template**
+3. Enter a trigger phrase or question pattern
+4. Enter the response template
+5. Save your template
+
+### Fallback Configuration
+
+Set up fallback options when your integration can't answer:
+
+1. Go to the **Fallbacks** tab
+2. Configure:
+   - Custom "I don't know" messages
+   - Human handoff options
+   - Alternative suggestions
+   - Feedback collection
+
+## Monitoring and Analytics
+
+### Conversation History
+
+View all interactions with your integration:
+
+1. Go to the **Conversations** tab
+2. Browse through conversation threads
+3. Filter by date, user, or content
+4. Export conversations for further analysis
+
+### Performance Metrics
+
+Track how well your integration is performing:
+
+1. Go to the **Analytics** tab
+2. View metrics such as:
+   - Total conversations
+   - Average conversation length
+   - Response time
+   - User satisfaction ratings
+   - Knowledge base coverage
+
+### Knowledge Gaps
+
+Identify areas where your integration needs improvement:
+
+1. Go to the **Knowledge Gaps** tab
+2. View questions the integration couldn't answer confidently
+3. Use these insights to update your knowledge bases
+
+## Best Practices
+
+- **Start focused**: Begin with a specific use case and expand as you gain confidence
+- **Test thoroughly**: Use the chat interface to test various scenarios before deploying
+- **Iterative improvement**: Regularly review conversations and refine your integration
+- **Clear expectations**: Set appropriate welcome messages to guide users on what they can ask
+- **Use multiple knowledge bases**: Connect specialized knowledge bases for different topics
+- **Monitor continuously**: Regularly check analytics to identify improvement opportunities
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="Integration Provides Incorrect Answers">
+    - Review your knowledge base for outdated or incorrect information
+    - Check if the question is outside the scope of your knowledge base
+    - Adjust the system prompt to better guide responses
+    - Consider adding more specific information on the topic
+  </Accordion>
+  
+  <Accordion title="Widget Not Appearing">
+    - Verify the embed code is correctly placed in your HTML
+    - Check for JavaScript errors in your browser's console
+    - Ensure your website doesn't have Content Security Policies blocking the script
+    - Try clearing your browser cache
+  </Accordion>
+  
+  <Accordion title="Trigger Buttons Not Working">
+    - Check that `enableTriggerButtons` is not set to `false` in your configuration
+    - Ensure the widget has finished loading before testing trigger buttons
+    - Verify the `data-knowflow-trigger` attribute is spelled correctly
+    - Check browser console for JavaScript errors
+    - Confirm that `window.KnowFlowWidget` exists for programmatic control
+  </Accordion>
+  
+  <Accordion title="Slow Response Times">
+    - Check your knowledge base size (very large knowledge bases may be slower)
+    - Verify your AI model selection (more powerful models may take longer)
+    - Consider optimizing your knowledge chunks for faster retrieval
+    - Check for any rate limiting on your account
+  </Accordion>
+</AccordionGroup> 
