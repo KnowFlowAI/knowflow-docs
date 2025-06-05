@@ -1,0 +1,72 @@
+---
+title: 'Discord Integration'
+description: 'Connect your AI integration to Discord servers'
+---
+
+## Discord Bot Integration
+
+Connect your AI integration to Discord servers for community support and automated assistance.
+
+## Setup Process
+
+<Steps>
+  <Step title="Configure Bot">
+    In the Discord tab of your integration:
+    - Set bot username and description
+    - Upload a custom avatar
+    - Configure command prefixes (defaults to `/ask`)
+  </Step>
+  <Step title="Connect to Discord">
+    1. Click **Connect to Discord**
+    2. Log in to Discord (if not already)
+    3. Select the server to add the bot to
+    4. Approve the permissions requested
+  </Step>
+  <Step title="Set Channel Permissions">
+    Configure which channels the bot can access and respond in.
+  </Step>
+  <Step title="Test Bot">
+    In your Discord server, use the configured command (e.g., `/ask How do I reset my password?`) to test the bot.
+  </Step>
+</Steps>
+
+## Bot Commands
+
+| Command | Description | Example |
+|---------|-------------|---------|
+| `/ask [question]` | Ask the AI a question | `/ask How do I reset my password?` |
+| `/help` | Show available commands | `/help` |
+| `/status` | Check bot status | `/status` |
+
+## Permissions Required
+
+The bot needs the following Discord permissions:
+
+- **Send Messages**: To respond to users
+- **Read Message History**: To maintain conversation context  
+- **Use Slash Commands**: To register and use slash commands
+- **Embed Links**: To send rich message embeds
+- **Add Reactions**: To add reaction-based feedback
+
+## Configuration Options
+
+### Response Settings
+
+- **Response Format**: Plain text or rich embeds
+- **Max Response Length**: Character limit for responses
+- **Reaction Feedback**: Enable thumbs up/down reactions
+- **Thread Support**: Create threads for longer conversations
+
+### Moderation Features
+
+- **Channel Restrictions**: Limit bot to specific channels
+- **Role Permissions**: Restrict usage to certain roles
+- **Rate Limiting**: Prevent spam and abuse
+- **Content Filtering**: Filter inappropriate content
+
+## Best Practices
+
+- **Clear Commands**: Use intuitive command names
+- **Channel Organization**: Designate specific channels for bot interactions
+- **User Education**: Inform users about bot capabilities
+- **Regular Monitoring**: Check bot performance and user feedback 

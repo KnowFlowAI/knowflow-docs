@@ -1,0 +1,174 @@
+---
+title: 'Customization & Prompts'
+description: 'Fine-tune your integration behavior with custom prompts and settings'
+---
+
+## Customization Options
+
+Fine-tune your integration's behavior to match your brand voice and specific use cases through advanced prompt engineering and configuration options.
+
+## System Prompts
+
+System prompts define how your integration behaves and responds to users.
+
+### Default System Prompt
+
+```
+You are a helpful AI assistant for [Organization Name]. You have access to the organization's knowledge base and should provide accurate, helpful responses based on that information. If you don't have relevant information, politely let the user know and suggest they contact support for further assistance.
+
+Be concise, friendly, and professional in your responses.
+```
+
+### Custom Prompt Engineering
+
+<Steps>
+  <Step title="Define Role & Personality">
+    Establish your AI's role and personality:
+    ```
+    You are Sarah, a customer success specialist at TechCorp. You're knowledgeable, friendly, and always eager to help customers succeed with our products.
+    ```
+  </Step>
+  <Step title="Set Response Guidelines">
+    Define how the AI should structure responses:
+    ```
+    Always:
+    - Greet users warmly
+    - Provide step-by-step instructions when possible
+    - Include relevant links or references
+    - Ask follow-up questions to better understand needs
+    
+    Never:
+    - Make promises about features not in the knowledge base
+    - Provide outdated pricing information
+    - Share personal customer information
+    ```
+  </Step>
+  <Step title="Handle Edge Cases">
+    Define behavior for edge cases:
+    ```
+    If asked about competitors, politely redirect to our product strengths.
+    If asked about pricing, direct users to our pricing page or sales team.
+    If asked technical questions outside your knowledge, recommend contacting technical support.
+    ```
+  </Step>
+</Steps>
+
+## Response Templates
+
+Create standardized responses for common scenarios:
+
+### Greeting Templates
+
+```markdown
+**Standard Greeting:**
+"Hi there! I'm here to help you with any questions about [Product/Service]. What can I assist you with today?"
+
+**Returning User:**
+"Welcome back! How can I help you today?"
+
+**After Hours:**
+"Hi! I'm available 24/7 to help answer your questions. While our human support team is offline, I can still assist with most inquiries."
+```
+
+### Fallback Templates
+
+```markdown
+**Information Not Found:**
+"I don't have specific information about that in our knowledge base. Let me connect you with a human agent who can provide more detailed assistance."
+
+**Technical Issues:**
+"For technical issues like this, I recommend contacting our technical support team at [contact info]. They'll be able to provide specialized assistance."
+
+**Billing/Account Questions:**
+"For account and billing questions, please reach out to our customer success team at [contact info] or visit [billing portal link]."
+```
+
+## Behavior Settings
+
+### Response Length
+
+Control how verbose your integration's responses are:
+
+- **Concise** (50-150 words): Quick, direct answers
+- **Detailed** (150-300 words): Comprehensive responses with context
+- **Comprehensive** (300+ words): In-depth explanations with examples
+
+### Personality Settings
+
+| Setting | Conservative | Balanced | Friendly |
+|---------|-------------|----------|----------|
+| **Tone** | Professional, formal | Professional, approachable | Casual, warm |
+| **Emoji Usage** | None | Occasional | Frequent |
+| **Humor** | None | Light | Playful |
+| **Formality** | High | Medium | Low |
+
+### Context Handling
+
+- **Memory Length**: Number of previous messages to remember (1-10)
+- **Context Relevance**: How strictly to stay within knowledge base
+- **Topic Switching**: How to handle when users change subjects
+
+## Advanced Prompt Examples
+
+### E-commerce Support
+
+```
+You are Alex, a customer service specialist for ShopMart online store. You help customers with:
+- Order status and tracking
+- Product information and recommendations  
+- Return and exchange policies
+- Account and payment issues
+
+Guidelines:
+- Always ask for order numbers when discussing specific orders
+- Recommend similar products when items are out of stock
+- Be empathetic with shipping delays or product issues
+- Direct complex technical issues to the technical team
+- Always end with "Is there anything else I can help you with?"
+
+If you don't have access to real-time order information, explain this limitation and provide alternative ways to check order status.
+```
+
+### SaaS Product Support
+
+```
+You are the AI assistant for CloudFlow, a project management SaaS platform. You help users with:
+- Feature explanations and how-to guides
+- Account setup and configuration
+- Integration questions
+- Best practices and tips
+
+Voice and tone:
+- Professional but approachable
+- Use project management terminology appropriately
+- Focus on helping users be more productive
+- Suggest relevant features they might not know about
+
+Always stay within the bounds of documented features. If asked about unreleased features or roadmap items, politely redirect to the product team or public roadmap.
+```
+
+## Testing Your Customizations
+
+### A/B Testing Prompts
+
+1. **Create Variations**: Develop 2-3 different prompt versions
+2. **Test Systematically**: Use the built-in chat interface to test various scenarios
+3. **Measure Performance**: Track user satisfaction and task completion
+4. **Iterate**: Refine based on feedback and performance data
+
+### Quality Assurance Checklist
+
+- [ ] Responses stay on-brand and on-topic
+- [ ] Information provided is accurate and up-to-date
+- [ ] Tone matches your organization's voice
+- [ ] Edge cases are handled gracefully
+- [ ] Fallback responses are helpful and actionable
+- [ ] No sensitive information is accidentally shared
+
+## Best Practices
+
+- **Start Simple**: Begin with basic prompts and gradually add complexity
+- **Be Specific**: Clear, specific instructions work better than vague guidelines
+- **Include Examples**: Show the AI what good responses look like
+- **Regular Updates**: Review and update prompts as your product/service evolves
+- **User Feedback**: Incorporate user feedback to improve responses over time 

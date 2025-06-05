@@ -1,0 +1,128 @@
+---
+title: 'Web Chat Widget'
+description: 'Embed your AI integration directly on your website'
+---
+
+## Web Chat Integration
+
+Embed your AI integration directly on your website with a customizable chat widget that provides instant support to your visitors.
+
+## Basic Setup
+
+<Steps>
+  <Step title="Configure Widget">
+    Customize the appearance of your widget:
+    - **Theme**: Light, dark, or custom colors
+    - **Position**: Bottom-right, bottom-left, etc.
+    - **Initial State**: Expanded or collapsed
+    - **Welcome Message**: Customize the initial greeting
+    - **Widget Icon**: Upload a custom icon
+  </Step>
+  <Step title="Get Embed Code">
+    Navigate to the **Embed** tab and copy the provided JavaScript snippet:
+    ```html
+    <script src="https://embed.knowflow.in/js/widget.js" 
+            data-app-id="YOUR_APP_ID" defer>
+    </script>
+    ```
+  </Step>
+  <Step title="Add to Website">
+    Paste the JavaScript snippet into your website's HTML, just before the closing `</body>` tag.
+  </Step>
+  <Step title="Test Implementation">
+    Visit your website to verify the widget appears and functions correctly.
+  </Step>
+</Steps>
+
+## Widget Configuration Options
+
+### Appearance Settings
+
+Customize your widget to match your brand:
+
+| Setting | Options | Description |
+|---------|---------|-------------|
+| **Primary Color** | Hex color code | Main widget theme color |
+| **Position** | bottom-right, bottom-left, top-right, top-left | Widget placement on page |
+| **Size** | small, medium, large | Widget button size |
+| **Shape** | round, square | Widget button shape |
+
+### Behavior Settings
+
+Control how your widget behaves:
+
+- **Auto-open**: Automatically open after X seconds
+- **Greeting Delay**: Time before showing welcome message
+- **Sound Notifications**: Enable/disable notification sounds
+- **Typing Indicators**: Show when AI is responding
+
+### Advanced Configuration
+
+```javascript
+window.KnowFlowConfig = {
+  integrationId: "your-integration-id",
+  websiteId: "your-website-id",
+  primaryColor: "#007bff",
+  position: "bottom-right",
+  initialMessage: "Hi! How can I help you?",
+  messagePlaceholder: "Type your message...",
+  integrationName: "Support Assistant",
+  integrationLogo: "https://your-domain.com/logo.png",
+  showBranding: true,
+  enableTriggerButtons: true
+};
+```
+
+## Styling and Customization
+
+### CSS Customization
+
+Override default styles with custom CSS:
+
+```css
+/* Custom widget button styling */
+#knowflow-widget-container button {
+  background: linear-gradient(45deg, #FF6B6B, #4ECDC4);
+  border-radius: 50%;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+/* Custom chat dialog styling */
+.knowflow-widget-dialog {
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+```
+
+### Responsive Design
+
+The widget automatically adapts to different screen sizes:
+
+- **Desktop**: Full-featured chat dialog
+- **Tablet**: Optimized dialog size
+- **Mobile**: Full-screen overlay on small devices
+
+## Next Steps
+
+<CardGroup cols={2}>
+  <Card title="Widget Trigger Buttons" href="/integrations/widget-triggers">
+    Add custom buttons to open your widget
+  </Card>
+  <Card title="Analytics & Monitoring" href="/integrations/analytics">
+    Track widget performance and conversations
+  </Card>
+  <Card title="Customization Options" href="/integrations/customization">
+    Advanced prompt and behavior customization
+  </Card>
+  <Card title="Troubleshooting" href="/integrations/troubleshooting">
+    Common widget issues and solutions
+  </Card>
+</CardGroup>
+
+## Best Practices
+
+- **Strategic Placement**: Position the widget where users naturally look for help
+- **Clear Messaging**: Use welcoming, helpful initial messages
+- **Brand Consistency**: Match widget colors to your site's brand
+- **Mobile Testing**: Always test on mobile devices
+- **Performance**: Monitor page load impact and optimize if needed 

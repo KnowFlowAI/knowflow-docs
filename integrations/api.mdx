@@ -1,0 +1,214 @@
+---
+title: 'API Integration'
+description: 'Direct API access for custom integrations and applications'
+---
+
+## API Integration
+
+Use KnowFlow's API to build custom integrations and applications that leverage your knowledge bases.
+
+## Getting Started
+
+<Steps>
+  <Step title="Get API Credentials">
+    1. Navigate to your integration settings
+    2. Go to the **API** tab
+    3. Generate API keys and note your integration ID
+  </Step>
+  <Step title="Test Connection">
+    Make a test API call to verify your setup:
+    ```bash
+    curl -X POST "https://api.knowflow.in/v1/integrations/YOUR_INTEGRATION_ID/chat" \
+      -H "Authorization: Bearer YOUR_API_KEY" \
+      -H "Content-Type: application/json" \
+      -d '{"message": "Hello, can you help me?"}'
+    ```
+  </Step>
+  <Step title="Implement in Your Application">
+    Integrate the API calls into your custom application or service.
+  </Step>
+</Steps>
+
+## API Endpoints
+
+### Send Message
+
+Send a message to your integration and receive a response.
+
+```http
+POST /v1/integrations/{integrationId}/chat
+```
+
+**Request Body:**
+```json
+{
+  "message": "How do I reset my password?",
+  "sessionId": "user-session-123",
+  "metadata": {
+    "userId": "user_123",
+    "source": "mobile_app"
+  }
+}
+```
+
+**Response:**
+```json
+{
+  "response": "To reset your password, follow these steps...",
+  "sessionId": "user-session-123",
+  "confidence": 0.95,
+  "sources": [
+    {
+      "title": "Password Reset Guide",
+      "url": "https://docs.company.com/password-reset"
+    }
+  ]
+}
+```
+
+### Get Conversation History
+
+Retrieve conversation history for a session.
+
+```http
+GET /v1/integrations/{integrationId}/conversations/{sessionId}
+```
+
+## Authentication
+
+All API requests require authentication using an API key:
+
+```http
+Authorization: Bearer YOUR_API_KEY
+```
+
+## Rate Limiting
+
+API requests are rate limited based on your plan:
+
+| Plan | Requests per minute | Requests per day |
+|------|-------------------|------------------|
+| **Free** | 60 | 1,000 |
+| **Pro** | 300 | 10,000 |
+| **Enterprise** | 1,000 | 100,000 |
+
+## SDK Examples
+
+### JavaScript/Node.js
+
+```javascript
+const knowflow = require('@knowflow/sdk');
+
+const client = new knowflow.Client({
+  apiKey: 'your-api-key',
+  integrationId: 'your-integration-id'
+});
+
+const response = await client.chat({
+  message: 'How can I help you?',
+  sessionId: 'user-123'
+});
+
+console.log(response.message);
+```
+
+### Python
+
+```python
+import knowflow
+
+client = knowflow.Client(
+    api_key='your-api-key',
+    integration_id='your-integration-id'
+)
+
+response = client.chat(
+    message='How can I help you?',
+    session_id='user-123'
+)
+
+print(response['message'])
+```
+
+### PHP
+
+```php
+<?php
+use KnowFlow\Client;
+
+$client = new Client([
+    'api_key' => 'your-api-key',
+    'integration_id' => 'your-integration-id'
+]);
+
+$response = $client->chat([
+    'message' => 'How can I help you?',
+    'session_id' => 'user-123'
+]);
+
+echo $response['message'];
+```
+
+## Error Handling
+
+The API uses standard HTTP status codes:
+
+| Status | Meaning |
+|--------|---------|
+| **200** | Success |
+| **400** | Bad Request - Invalid parameters |
+| **401** | Unauthorized - Invalid API key |
+| **429** | Too Many Requests - Rate limit exceeded |
+| **500** | Internal Server Error |
+
+Example error response:
+```json
+{
+  "error": {
+    "code": "INVALID_REQUEST",
+    "message": "The message parameter is required"
+  }
+}
+```
+
+## Webhooks
+
+Configure webhooks to receive real-time notifications:
+
+### Setup
+
+1. Configure webhook URL in your integration settings
+2. Choose which events to receive notifications for
+3. Verify webhook signature for security
+
+### Event Types
+
+- `conversation.started` - New conversation initiated
+- `conversation.ended` - Conversation completed
+- `message.received` - New message from user
+- `message.sent` - Response sent to user
+
+### Webhook Payload
+
+```json
+{
+  "event": "message.received",
+  "timestamp": "2023-10-15T14:30:00Z",
+  "data": {
+    "integrationId": "int_123",
+    "sessionId": "session_456",
+    "message": "Hello, I need help",
+    "metadata": {
+      "userId": "user_789"
+    }
+  }
+}
+```
+
+## Best Practices
+
+- **Use Session IDs**: Maintain conversation context with consistent session identifiers
+- **Handle Rate Limits**: Implement retry logic with exponential backoff
+- **Secure API Keys**: Store API keys securely and rotate them regularly
+- **Monitor Usage**: Track API usage to stay within limits
+- **Cache Responses**: Cache frequently requested information to reduce API calls 

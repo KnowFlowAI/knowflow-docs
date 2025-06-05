@@ -1,0 +1,121 @@
+---
+title: 'Troubleshooting'
+description: 'Common issues and solutions for integrations'
+---
+
+## Common Issues & Solutions
+
+Troubleshoot common problems with your KnowFlow integrations.
+
+## Widget Issues
+
+<AccordionGroup>
+  <Accordion title="Widget Not Appearing">
+    **Symptoms:** The chat widget doesn't show up on your website
+    
+    **Solutions:**
+    1. **Check Script Installation**
+       - Verify the script tag is in your HTML
+       - Ensure it's placed before the closing `</body>` tag
+       - Check for JavaScript errors in browser console
+    
+    2. **Verify Integration ID**
+       - Confirm the `data-app-id` matches your integration ID
+       - Check for typos in the integration ID
+    
+    3. **Check CSS Conflicts**
+       - Look for CSS rules that might hide the widget
+       - Check z-index conflicts with other page elements
+       
+    **Quick Test:**
+    ```javascript
+    // Check if widget script loaded
+    console.log(window.KnowFlowWidget ? 'Widget loaded' : 'Widget not loaded');
+    ```
+  </Accordion>
+  
+  <Accordion title="Widget Appears But Doesn't Respond">
+    **Symptoms:** Widget shows but clicking doesn't open chat or shows errors
+    
+    **Solutions:**
+    1. **Check Network Connectivity**
+       - Open browser dev tools → Network tab
+       - Look for failed API requests
+       - Verify your domain is allowlisted in widget settings
+    
+    2. **Verify Integration Status**
+       - Check if your integration is active in the dashboard
+       - Ensure knowledge bases are connected
+       - Confirm API usage limits aren't exceeded
+    
+    3. **Clear Cache**
+       - Hard refresh the page (Ctrl+F5 / Cmd+Shift+R)
+       - Clear browser cache and cookies
+       - Try in incognito/private browsing mode
+  </Accordion>
+  
+  <Accordion title="Trigger Buttons Not Working">
+    **Symptoms:** Custom trigger buttons don't open/close the widget
+    
+    **Solutions:**
+    1. **Check Attribute Spelling**
+       ```html
+       <!-- Correct -->
+       <button data-knowflow-trigger="open">Help</button>
+       
+       <!-- Incorrect -->
+       <button data-knowflow-triggers="open">Help</button>
+       ```
+    
+    2. **Verify Trigger Settings**
+       - Ensure `enableTriggerButtons` is not set to `false`
+       - Check that buttons are added to DOM after page load
+    
+    3. **Test Programmatic API**
+       ```javascript
+       // Test if API is available
+       if (window.KnowFlowWidget) {
+         window.KnowFlowWidget.open();
+       } else {
+         console.log('Widget API not available');
+       }
+       ```
+  </Accordion>
+</AccordionGroup>
+
+## Getting Help
+
+### Self-Service Resources
+
+1. **Check System Status**
+   - Visit status page for service status
+   - Review recent announcements and updates
+
+2. **Review Documentation**
+   - Search this documentation for specific topics
+   - Check our best practices guides
+
+3. **Test in Isolation**
+   - Try your integration on a simple test page
+   - Use the built-in chat interface in the dashboard
+
+### Contact Support
+
+If you can't resolve the issue:
+
+1. **Gather Information**
+   - Integration ID and organization name
+   - Browser/platform details
+   - Screenshots or error messages
+   - Steps to reproduce the issue
+
+2. **Submit Support Request**
+   - Use the support widget on our website
+   - Include all relevant details
+
+## Prevention Tips
+
+- **Regular Testing**: Test your integrations weekly
+- **Monitor Analytics**: Watch for unusual patterns or drops in performance
+- **Keep Updated**: Stay informed about platform updates and changes
+- **Backup Configurations**: Document your settings and prompt configurations 

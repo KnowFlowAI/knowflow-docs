@@ -33,8 +33,28 @@
             "pages": [
               "essentials/organizations",
               "essentials/knowledge-bases",
-              "essentials/integrations",
               "essentials/analytics"
+            ]
+          },
+          {
+            "group": "Integrations",
+            "pages": [
+              "integrations/overview",
+              "integrations/creating-integrations",
+              {
+                "group": "Deployment",
+                "pages": [
+                  "integrations/web-chat",
+                  "integrations/widget-triggers",
+                  "integrations/discord",
+                  "integrations/slack",
+                  "integrations/api"
+                ]
+              },
+              "integrations/customization",
+              "integrations/analytics",
+              "integrations/best-practices",
+              "integrations/troubleshooting"
             ]
           },
           {

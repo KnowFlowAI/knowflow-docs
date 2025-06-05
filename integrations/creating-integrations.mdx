@@ -1,0 +1,100 @@
+---
+title: 'Creating Integrations'
+description: 'Step-by-step guide to creating and configuring your first integration'
+---
+
+## Creating an Integration
+
+<Steps>
+  <Step title="Navigate to Integrations">
+    From your organization dashboard, click on **Integrations** in the left sidebar.
+  </Step>
+  <Step title="Create New Integration">
+    Click the **Create Integration** button in the upper right corner.
+  </Step>
+  <Step title="Select Type">
+    Choose the type of integration you want to create:
+    - **Web Chat**: Embeddable chat widget for your website
+    - **API Endpoint**: Direct API access for custom integrations
+    - **Discord Bot**: Integration with Discord servers
+    - **Slack Bot**: Integration with Slack organizations
+    - **Microsoft Teams**: Integration with Microsoft Teams
+  </Step>
+  <Step title="Basic Configuration">
+    Enter the following information:
+    - **Name**: A descriptive name for your integration
+    - **Description**: (Optional) A brief description of its purpose
+    - **Icon/Avatar**: Upload a custom icon or choose from available options
+  </Step>
+  <Step title="Connect Knowledge Bases">
+    Select one or more knowledge bases to power your integration:
+    1. Click **Add Knowledge Base**
+    2. Select from your available knowledge bases
+    3. Set priority levels if using multiple knowledge bases
+  </Step>
+  <Step title="Configure Settings">
+    Adjust various settings according to your needs:
+    - **AI Model**: Select the underlying AI model (e.g., GPT-4, Claude, etc.)
+    - **Language**: Set the primary language for responses
+    - **Message History**: Configure how many previous messages to maintain as context
+    - **Maximum Response Length**: Set character limits for responses
+  </Step>
+  <Step title="Save">
+    Click **Create** to finish setting up your integration.
+  </Step>
+</Steps>
+
+## Configuration Options
+
+### AI Model Selection
+
+Choose the right AI model for your use case:
+
+| Model | Best For | Response Speed | Cost |
+|-------|----------|----------------|------|
+| **GPT-4** | Complex queries, high accuracy | Slower | Higher |
+| **GPT-3.5 Turbo** | General purpose, balanced | Fast | Lower |
+| **Claude** | Long-form content, analysis | Medium | Medium |
+
+### Knowledge Base Priority
+
+When connecting multiple knowledge bases:
+
+1. **High Priority**: Primary sources that should be searched first
+2. **Medium Priority**: Secondary sources for broader context
+3. **Low Priority**: Fallback sources for edge cases
+
+### Response Configuration
+
+Fine-tune how your integration responds:
+
+- **Response Length**: 50-2000 characters
+- **Temperature**: Controls creativity (0.1 = focused, 0.9 = creative)
+- **Context Window**: Number of previous messages to consider (1-10)
+
+## Next Steps
+
+Once your integration is created:
+
+<CardGroup cols={2}>
+  <Card title="Deploy Your Integration" href="/integrations/web-chat">
+    Choose how to deploy your integration to users
+  </Card>
+  <Card title="Customize Behavior" href="/integrations/customization">
+    Fine-tune prompts and response templates
+  </Card>
+  <Card title="Monitor Performance" href="/integrations/analytics">
+    Track conversations and optimize performance
+  </Card>
+  <Card title="Advanced Features" href="/integrations/widget-triggers">
+    Explore trigger buttons and advanced options
+  </Card>
+</CardGroup>
+
+## Best Practices for Setup
+
+- **Start Simple**: Begin with one knowledge base and expand gradually
+- **Test Early**: Use the built-in chat interface to test before deploying
+- **Clear Naming**: Use descriptive names that indicate the integration's purpose
+- **Appropriate Models**: Choose AI models based on your accuracy vs. speed needs
+- **Monitor Usage**: Keep track of API usage and costs from day one 

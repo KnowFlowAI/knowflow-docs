@@ -1,0 +1,233 @@
+---
+title: 'Widget Trigger Buttons'
+description: 'Add custom buttons that can open, close, or toggle your chat widget'
+---
+
+## Widget Trigger Buttons
+
+Enhance your website UX by adding custom buttons that can open, close, or toggle your chat widget. This allows you to integrate the widget seamlessly with your existing design and user flow.
+
+## Basic Usage
+
+<Steps>
+  <Step title="Enable Trigger Buttons">
+    When configuring your widget, ensure trigger buttons are enabled:
+    ```javascript
+    window.KnowFlowConfig = {
+      integrationId: "your-integration-id",
+      websiteId: "your-website-id",
+      enableTriggerButtons: true, // Default: true
+      // ... other config options
+    };
+    ```
+  </Step>
+  <Step title="Add Data Attributes">
+    Add the `data-knowflow-trigger` attribute to any HTML element:
+    ```html
+    <!-- Open the widget -->
+    <button data-knowflow-trigger="open">Get Help</button>
+
+    <!-- Close the widget -->
+    <button data-knowflow-trigger="close">Close Chat</button>
+
+    <!-- Toggle the widget (default action) -->
+    <button data-knowflow-trigger="toggle">Chat Support</button>
+    <button data-knowflow-trigger>Chat Support</button>
+    ```
+  </Step>
+  <Step title="Style Your Buttons">
+    The trigger works on any HTML element, allowing for creative implementations:
+    ```html
+    <!-- Help card -->
+    <div class="help-card" data-knowflow-trigger="open">
+      <h3>💬 Need Help?</h3>
+      <p>Click here to chat with our AI assistant</p>
+    </div>
+
+    <!-- Help icon -->
+    <i class="fa fa-question-circle" 
+       data-knowflow-trigger="open" 
+       title="Get Help"></i>
+
+    <!-- Image trigger -->
+    <img src="help-icon.png" 
+         alt="Help" 
+         data-knowflow-trigger="open" />
+    ```
+  </Step>
+  <Step title="Test Your Triggers">
+    Load your website and test that the trigger buttons work as expected.
+  </Step>
+</Steps>
+
+## Supported Actions
+
+| Action | Description | Use Case |
+|--------|-------------|----------|
+| `open` | Opens the widget dialog | "Get Help" buttons, FAQ links |
+| `close` | Closes the widget dialog | Custom close buttons in your UI |
+| `toggle` | Toggles the widget state | General "Chat" or "Support" buttons |
+
+## Advanced Implementation
+
+### Programmatic Control
+
+Control the widget via JavaScript for advanced interactions:
+
+```javascript
+// Wait for widget to initialize
+setTimeout(() => {
+  // Open the widget
+  window.KnowFlowWidget.open();
+  
+  // Close the widget
+  window.KnowFlowWidget.close();
+  
+  // Toggle the widget
+  window.KnowFlowWidget.toggle();
+}, 1000);
+```
+
+### Dynamic Elements
+
+The widget automatically detects trigger buttons added after page load:
+
+```javascript
+// Add a trigger button dynamically
+const button = document.createElement("button");
+button.textContent = "Dynamic Help Button";
+button.setAttribute("data-knowflow-trigger", "open");
+document.body.appendChild(button);
+// This button will work immediately
+```
+
+### Event Handling
+
+Listen for widget state changes:
+
+```javascript
+// Custom event handling (if you need to track opens/closes)
+document.addEventListener('click', function(e) {
+  if (e.target.hasAttribute('data-knowflow-trigger')) {
+    // Your custom analytics or tracking code
+    console.log('Widget trigger clicked:', e.target);
+  }
+});
+```
+
+## Real-World Examples
+
+### FAQ Page Integration
+
+```html
+<div class="faq-section">
+  <h2>Frequently Asked Questions</h2>
+  
+  <div class="faq-item">
+    <h3>How do I reset my password?</h3>
+    <p>You can reset your password by...</p>
+    <a href="#" data-knowflow-trigger="open" class="help-link">
+      Still need help? Chat with us
+    </a>
+  </div>
+  
+  <div class="faq-item">
+    <h3>How do I cancel my subscription?</h3>
+    <p>To cancel your subscription...</p>
+    <a href="#" data-knowflow-trigger="open" class="help-link">
+      Chat with support
+    </a>
+  </div>
+</div>
+```
+
+### Support Card Design
+
+```html
+<div class="support-options">
+  <div class="support-card" data-knowflow-trigger="open">
+    <div class="card-icon">💬</div>
+    <h3>Chat with AI</h3>
+    <p>Get instant answers to your questions</p>
+    <span class="card-cta">Click to start chatting</span>
+  </div>
+</div>
+
+<style>
+.support-card {
+  cursor: pointer;
+  padding: 2rem;
+  border: 1px solid #e1e5e9;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+}
+
+.support-card:hover {
+  border-color: #007bff;
+  box-shadow: 0 4px 12px rgba(0,123,255,0.15);
+  transform: translateY(-2px);
+}
+</style>
+```
+
+### Header Navigation
+
+```html
+<nav class="header-nav">
+  <ul>
+    <li><a href="/home">Home</a></li>
+    <li><a href="/products">Products</a></li>
+    <li><a href="/support">Support</a></li>
+    <li>
+      <button class="help-button" data-knowflow-trigger="open">
+        <i class="icon-help"></i> Live Chat
+      </button>
+    </li>
+  </ul>
+</nav>
+```
+
+## Best Practices
+
+### Design Guidelines
+
+- **Clear Call-to-Action**: Use action-oriented text like "Get Help" or "Chat Now"
+- **Visual Hierarchy**: Make trigger buttons visually distinct but not overwhelming
+- **Consistent Styling**: Match your site's design system and brand colors
+- **Accessibility**: Include proper ARIA labels and keyboard navigation support
+
+### Placement Strategy
+
+- **FAQ Pages**: Add "Still need help?" links after each question
+- **Product Pages**: Include support triggers near pricing or technical details
+- **Error Pages**: Offer immediate assistance when users encounter problems
+- **Checkout Flow**: Provide help during critical conversion moments
+
+### Performance Considerations
+
+- **Minimal Impact**: Trigger buttons add no performance overhead
+- **Progressive Enhancement**: Buttons work even if the widget fails to load
+- **SEO Friendly**: Search engines can still crawl and index your content
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="Trigger Buttons Not Working">
+    - Check that `enableTriggerButtons` is not set to `false` in your configuration
+    - Ensure the widget has finished loading before testing trigger buttons
+    - Verify the `data-knowflow-trigger` attribute is spelled correctly
+    - Check browser console for JavaScript errors
+  </Accordion>
+  
+  <Accordion title="Programmatic API Not Available">
+    - Confirm that `window.KnowFlowWidget` exists for programmatic control
+    - Wait for the widget to fully initialize before calling API methods
+    - Check that your widget configuration is valid
+  </Accordion>
+  
+  <Accordion title="Dynamic Buttons Not Working">
+    - The widget automatically detects new buttons, no additional setup needed
+    - Ensure the attribute is added correctly: `data-knowflow-trigger="open"`
+    - Check that the element is properly added to the DOM
+  </Accordion>
+</AccordionGroup> 
